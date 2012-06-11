@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Windows 8 Notification Client for Metro Apps</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div id="header">
+                 <div id="title">
+                    <h1>Windows 8 Notification Client for Metro Apps</h1>
+                </div>                        
+            
+                <div class="clear"></div>
+
+            </div>
+        </header>
+        <section id="main">
+        
+            <h2>Introduction</h2>
+            <p>
+                The Windows 8 Notification Client for Metro Apps lets client devices open and register a 
+                channel (and close/unregister) with a server that handles registrations and can deliver notifications to
+                them using the Windows Push Notification Service (WNS).
+                If you want to create a notification server, you can leverage the <a href="http://nuget.org/packages/WindowsAzure.Notifications">WindowsAzure.Notifications</a> NuGet.
+            </p>
+            <p>
+                This package includes a class library that contains the WinRT component that handles this process. 
+                By default, the registration service is called anonymously, but you can add additional headers 
+                with authentication tokens.
+			</p>
+            <p>
+                The library can be used in Metro apps created on any of the following platforms: Native/Managed/Script.
+            </p>
+
+            <!------------------------------------------>
+            <h3>Prerequisites</h3>
+            <ul>
+                <li><a href="http://preview.windows.com/">Windows 8 Consumer Preview or later</a></li>
+                <li><a href="http://www.microsoft.com/visualstudio/11/">Microsoft Visual Studio 11 Beta or later (for Windows 8 Consumer Preview or later)</a></li>
+            </ul>
+			
+			<h2>Configuration and Usage</h2>
+            <h3>Using the Notification Client Component</h3>
+            <p>
+                Installing this NuGet will add a reference to the <strong>Windows8.Notifications</strong> library to your project:
+            </p>
+            
+            <p>	
+             <img src="Content/NotificationsSolutionExplorer.png" alt="Added reference to your project" style="border: 1px solid black; padding: 15px" />			
+            </p>
+
+            <p>
+                To open and register a channel, you need to instantiate a <b>NotificationClient</b> object.
+			</p>
+
+            <p>	
+				The following example shows how to use the client object to open and register a channel. 
+                This particular example also includes the use of an authentication OAuth header to access a secured service from a JS Metro App:
+            </p>	
+            
+            <p>	
+             <img src="Content/NotificationsClient.png" alt="Using the NotificationClient object to open/register a channel" style="border: 1px solid black; padding: 15px" />			
+            </p>
+
+			<ul>
+				<li><strong>applicationId</strong>, <strong>clientId</strong> parameters are configured at the Windows Notification Service Portal</li>
+				<li><strong>registrationEndpoint</strong> is the URL of the registration service that handles sending Windows Notifications (this is the endpoint of the service exposed by the <a href="http://nuget.org/packages/WindowsAzure.Notifications">WindowsAzure.Notifications</a> NuGet)</li>
+			</ul>		
+		</section>
+    </div>
+</body>
+</html>
