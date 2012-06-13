@@ -423,7 +423,7 @@ In this task you will create a new ASP.NET Web API service with Entity Framework
 
 	_Adding a reference to System.Runtime.Serialization_
 
-1. Right-click the **Models** folder in the **Solution Explorer** and select **Add | Class**. Name it **Customers.cs**.
+1. Right-click the **Models** folder in the **Solution Explorer** and select **Add | Class**. Name it **Customer.cs**.
 
 	![Adding a model class](images/add-model-class.png?raw=true "Add model class")
 
@@ -431,7 +431,7 @@ In this task you will create a new ASP.NET Web API service with Entity Framework
 
 	> **Note:** You will start by creating a Customer model class, and your CRUD operations in the service will be automatically created using scaffolding features.
 
-1. Replace the Customers.cs class content with the following code. Press **CTRL+S** to save the changes.
+1. Replace the Customer.cs class content with the following code. Press **CTRL+S** to save the changes.
 
 	(Code Snippet - _Building Windows 8 Apps - Ex2 - Customer class_)
 	<!-- mark:1-36 -->
@@ -1026,6 +1026,8 @@ In this task you will obtain the information that will be needed to enable your 
 	````XML
 	<add name="CustomerContext" connectionString="Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];Password=[SERVER_ADMIN_PASSWORD];Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" providerName="System.Data.SqlClient" />
 	````
+
+1. Build the solution.
 
 1. Open the Package Manager Console and execute the following commands to revert Entity Framework to a previous version. MVC 4 is using Entity Framework 5 Beta and the Windows Azure Toolkit for Windows 8 is designed for version 4.3.1. 
 
