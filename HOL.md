@@ -1019,9 +1019,13 @@ Before you can send notifications through WNS, you must register your applicatio
 
 In this task you will obtain the information that will be needed to enable your application to communicate with WNS and Live Connect.
 
-1. In Visual Studio, open **CustomerManager.sln** located in the **Source/Ex3-Notifications/Begin** folder of this lab.
+1. In Visual Studio, continue working with the solution obtained from the previous exercise. If you did not executed the previous exsercise you can open **CustomerManager.sln** located in the **Source/Ex3-Notifications/Begin** folder of this lab.
 
-	Alternatively, you can continue working with the solution obtained from the previous exercise.
+1. If you opened *CustomerManager.sln** located in the **Source/Ex3-Notifications/Begin** folder of this lab, open **Web.config** and configure the **CustomerContext** connection string to point to a Windows Azure SQL Database. You can use the connection string below replacing the placeholders. [Exercise 2 - Task 3](#Ex2Task3) instructs how to do this.
+
+	````XML
+	<add name="CustomerContext" connectionString="Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];Password=[SERVER_ADMIN_PASSWORD];Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" providerName="System.Data.SqlClient" />
+	````
 
 1. Open the Package Manager Console and execute the following commands to revert Entity Framework to a previous version. MVC 4 is using Entity Framework 5 Beta and the Windows Azure Toolkit for Windows 8 is designed for version 4.3.1. 
 
@@ -1104,8 +1108,6 @@ In this task you will configure your application  to be capable of raising toast
     _Enabling network capabilities_
 
 1. Open the **Package Manager Console** from the **Tools | Library Package Manager** menu.
-
-	> **Warning:**  If you have issues installing the packages you can get the latest versions from the **Source\Windows8ToolkitNuGets** folder of this lab. To use them you need to create a local NuGet package source as explained [here](http://docs.nuget.org/docs/creating-packages/hosting-your-own-nuget-feeds).
 
 1. In **Default project** select **CustomerManager.Metro**.
 
