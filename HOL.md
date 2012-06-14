@@ -952,7 +952,7 @@ In this task you will bind your Windows 8 Metro Style Application against your c
 
 	>**Note:** You can find your service URL in the  dashboard of your Windows Azure Web Sites.
 
-<a name="Ex2Task5" />
+<a name="Ex2Task6" />
 #### Task 6 - A Lap Around the Customer Manager Application ####
 
 1. Press **CTRL+SHIFT+B** to build the solution. Make sure the Metro Style application project is selected as the startup project.
