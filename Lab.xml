@@ -3,7 +3,7 @@
   <Id>BuildingWindows8AppsWithWindowsAzure</Id>
   <Technologies>
     <Technology>Windows Azure</Technology>	
-	<Technology>Windows 8 Metro style apps</Technology>
+	<Technology>Windows 8 Style UI apps</Technology>
 	<Technology>ASP.NET Web Api</Technology>
   </Technologies>
   <Author>
@@ -13,7 +13,7 @@
 	</Email>	
     <Name></Name>
   </Author>
-  <Description>In this hands-on lab you will learn how to combine the fluency of Windows 8 applications with the power of Windows Azure: From a Windows Metro Style application, you will consume an ASP.NET MVC 4 Web API service published in Windows Azure Web Sites, and store your data in a Windows Azure SQL Database. In addition, you will learn how to configure the Windows Push Notification Services (WNS) in your app to send toast notifications from your service to all the registered clients.</Description>
+  <Description>In this hands-on lab you will learn how to combine the fluency of Windows 8 applications with the power of Windows Azure: From a Windows 8 Style UI application, you will consume an ASP.NET MVC 4 Web API service published in Windows Azure Web Sites, and store your data in a Windows Azure SQL Database. In addition, you will learn how to configure the Windows Push Notification Services (WNS) in your app to send toast notifications from your service to all the registered clients.</Description>
   <Document ConversionType="Html">.\HOL.md</Document>
   <Title>Building Windows 8 Applications using Windows Azure</Title>
   <Version>1.0.0</Version>

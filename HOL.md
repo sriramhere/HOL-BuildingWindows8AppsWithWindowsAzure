@@ -25,7 +25,7 @@ In this hands-on lab, you will learn how to use Visual Studio 2012 to:
 The following is required to complete this hands-on lab:
 
 - [Microsoft Visual Studio 2012](http://www.microsoft.com/visualstudio/11/en-us)
-- A Windows Azure subscription with the Web Sites Preview enabled - you can sign up for free trial [here](http://bit.ly/WindowsAzureFreeTrial)
+- A Windows Azure subscription with the Web Sites Preview enabled - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 
 >**Note:** This lab was designed to use Windows 8 Operating System.
 
