@@ -5,9 +5,9 @@
 <a name="Overview" />
 ## Overview ##
 
-Apps are at the center of the Windows 8 experience. They’re alive with activity and vibrant content. Users are immersed in your full-screen, Metro style apps, where they can focus on their content, rather than on the operating system.
+Apps are at the center of the Windows 8 experience. They’re alive with activity and vibrant content. Users are immersed in your full-screen, Windows 8 Style UI apps, where they can focus on their content, rather than on the operating system.
 
-In this hands-on lab you will learn how to combine the fluency of Windows 8 applications with the power of Windows Azure: From a Windows Metro Style application, you will consume an ASP.NET MVC 4 Web API service published in Windows Azure Web Sites, and store your data in a Windows Azure SQL Database. In addition, you will learn how to configure the Windows Push Notification Services (WNS) in your app to send toast notifications from your service to all the registered clients.
+In this hands-on lab you will learn how to combine the fluency of Windows 8 applications with the power of Windows Azure: From a Windows Windows 8 Style UI application, you will consume an ASP.NET MVC 4 Web API service published in Windows Azure Web Sites, and store your data in a Windows Azure SQL Database. In addition, you will learn how to configure the Windows Push Notification Services (WNS) in your app to send toast notifications from your service to all the registered clients.
 
 <a name="Objectives" />
 ### Objectives ###
@@ -16,8 +16,8 @@ In this hands-on lab, you will learn how to use Visual Studio 2012 to:
 
 * Create an ASP.NET MVC 4 Web API service
 * Publish the service to Windows Azure Web Sites
-* Create a Windows 8 Metro Style application that consumes the Web API service
-* Add Push Notifications to the Metro style application by using the Windows Azure Toolkit for Windows 8
+* Create a Windows 8 Style UI application that consumes the Web API service
+* Add Push Notifications to the Windows 8 Style UI application by using the Windows Azure Toolkit for Windows 8
 
 <a name="Prerequisites" />
 ### Prerequisites ###
@@ -50,22 +50,22 @@ Throughout the lab document, you will be instructed to insert code blocks. For y
 
 This hands-on lab includes the following exercises:
 
-1. [Building and Consuming an ASP.NET Web API from a Windows 8 Metro Style App](#Exercise1)
+1. [Building and Consuming an ASP.NET Web API from a Windows 8 Style UI App](#Exercise1)
 1. [Basic Data Binding and Data Access Using Windows Azure SQL Databases and Entity Framework Code First](#Exercise2)
-1. [Adding Push Notification Support to your Metro Style Application](#Exercise3)
+1. [Adding Push Notification Support to your Windows 8 Style UI Application](#Exercise3)
 
 > **Note:** Each exercise is accompanied by a starting solution located in the Begin folder of the exercise that allows you to follow each exercise independently of the others. Please be aware that the code snippets that are added during an exercise are missing from these starting solutions and that they will not necessarily work until you complete the exercise.
 >
 >Inside the source code for an exercise, you will also find an End folder containing a Visual Studio solution with the code that results from completing the steps in the corresponding exercise. You can use these solutions as guidance if you need additional help as you work through this hands-on lab.
 
 <a name="Exercise1" />
-### Exercise 1: Building and Consuming an ASP.NET Web API from a Windows 8 Metro Style App ###
+### Exercise 1: Building and Consuming an ASP.NET Web API from a Windows 8 Style UI App ###
 
 ASP.NET Web API is a new framework from MVC 4 that facilitates to build and consume HTTP services for a wide range of clients.
 
-In this exercise you will learn the basics of consuming an ASP.NET MVC 4 Web API REST service - hosted in Windows Azure Web Sites - from a Windows 8 Metro Style application. 
+In this exercise you will learn the basics of consuming an ASP.NET MVC 4 Web API REST service - hosted in Windows Azure Web Sites - from a Windows 8 Style UI application. 
 
-For that purpose, you will first create a new Azure Web Site in the portal to host the service. Then, you will create a new ASP.NET MVC 4 Web API project and publish it in Windows Azure from Visual Studio. Once the default service is published, you will create a basic Windows 8 Metro Style client application with a simple list to retrieve the service values.
+For that purpose, you will first create a new Azure Web Site in the portal to host the service. Then, you will create a new ASP.NET MVC 4 Web API project and publish it in Windows Azure from Visual Studio. Once the default service is published, you will create a basic Windows 8 Style UI client application with a simple list to retrieve the service values.
 
 <a name="Ex1Task1" />
 #### Task 1 – Creating a New Web Site Hosted in Windows Azure ####
@@ -243,21 +243,21 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 	_Default web service - Published_
 
 <a name="Ex1Task4" />
-#### Task 4 – Creating a Windows 8 Metro Style Client Application ####
+#### Task 4 – Creating a Windows 8 Style UI Client Application ####
 
-In this task you will create a blank Windows 8 Metro Style application that will consume the service you have already running.
+In this task you will create a blank Windows 8 Style UI application that will consume the service you have already running.
 
 1. Switch back to Visual Studio. Right-click the solution node on the Solution Explorer and select **Add | New Project**.
 
-1. In the **New Project** dialog, select the **Blank** application under the **Visual C# | Windows Metro style** applications. Name it _MetroStyleClient_ and click **OK**.
+1. In the **New Project** dialog, select the **Blank** application under the **Visual C# | Windows Windows 8 Style UI** applications. Name it _MetroStyleClient_ and click **OK**.
 
 	Make sure the selected framework is **.NET Framework 4.5**.
 
-	![Add a new Metro Style application basic client project](images/add-new-metro-app-basic-client-project.png?raw=true "Add new Metro Style application basic client project")
+	![Add a new Windows 8 Style UI application basic client project](images/add-new-metro-app-basic-client-project.png?raw=true "Add new Windows 8 Style UI application basic client project")
 
-	_Add a new Metro Style application basic client project_
+	_Add a new Windows 8 Style UI application basic client project_
 
-1. In the Metro Style application, open **MainPage.xaml.cs** and add a reference to Windows.Data.Json.
+1. In the Windows 8 Style UI application, open **MainPage.xaml.cs** and add a reference to Windows.Data.Json.
 
 	<!-- mark:1 -->
 	````C#
@@ -329,7 +329,7 @@ In this task you will create a blank Windows 8 Metro Style application that will
 	</Grid>
 	````
 
-1. Make sure the Metro Style application is the start up project and press **F5** to run the solution. 
+1. Make sure the Windows 8 Style UI application is the start up project and press **F5** to run the solution. 
 
 	You will see that the values retrieved from the service are listed in the List Box
 
@@ -342,10 +342,10 @@ In this task you will create a blank Windows 8 Metro Style application that will
 <a name="Exercise2" />
 ### Exercise 2: Basic Data Binding and Data Access Using Windows Azure SQL Databases and Entity Framework Code First ###
 
-In this exercise, you will learn how to bind your Windows 8 Metro Style application to an ASP.NET Web API service which is using Code First to generate the database from the model in SQL Database.
+In this exercise, you will learn how to bind your Windows 8 Style UI application to an ASP.NET Web API service which is using Code First to generate the database from the model in SQL Database.
 
 You will start the exercise provisioning a new SQL Database. Then, you will create a new ASP.NET Web API service and use Entity Framework Scaffolding with Code First to generate the service methods and a database in SQL Database.
-Finally, you will explore and customize your Metro Style application to consume the service and show a customer list.
+Finally, you will explore and customize your Windows 8 Style UI application to consume the service and show a customer list.
 
 **About Entity Framework Code First**
 
@@ -391,7 +391,7 @@ In this task you will create a new ASP.NET Web API service with Entity Framework
 
 1. In Visual Studio, open **CustomerManager.sln** located in the **source/Ex2-DataAccess/Begin** folder of this lab.
 
-	This solution already contains a Metro Style application; you will now add a Web API service used by the application to retrieve the data.
+	This solution already contains a Windows 8 Style UI application; you will now add a Web API service used by the application to retrieve the data.
 
 1. Right-click the Solution Explorer and select **Add | New Project**. 
 
@@ -474,7 +474,7 @@ In this task you will create a new ASP.NET Web API service with Entity Framework
 	}
 	````
 	
-	>**Note:** You are adding **DataContract** and **DataMember** annotations to the class and its attributes because the Metro Style client application is using DataContractJSONSerializer object to read and serialize the customers to JSON. 
+	>**Note:** You are adding **DataContract** and **DataMember** annotations to the class and its attributes because the Windows 8 Style UI client application is using DataContractJSONSerializer object to read and serialize the customers to JSON. 
 
 1. In Solution Explorer, right-click the WebApi project and select **Build**.
 
@@ -731,19 +731,19 @@ Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];P
 	>**Note:** Entity Framework will create the database the first time you run the application. You can also access the database tables in Windows Azure portal and check if the data was added.
 
 <a name="Ex2Task4" />
-#### Task 4 - Exploring the Windows 8 Metro Style Application ####
+#### Task 4 - Exploring the Windows 8 Style UI Application ####
 
-In this task you will explore the Customer client application, built using a Windows 8 Metro Style application Grid Template. You will perform a brief lap around and learn about the main components of a Metro Grid application. 
+In this task you will explore the Customer client application, built using a Windows 8 Style UI application Grid Template. You will perform a brief lap around and learn about the main components of a Metro Grid application. 
 
-1. In Visual Studio, expand the **CustomerManager.Metro** project in the Solution Explorer. This is a client Metro Style application that displays customers. It is based on the Visual Studio Grid template.
+1. In Visual Studio, expand the **CustomerManager.Metro** project in the Solution Explorer. This is a client Windows 8 Style UI application that displays customers. It is based on the Visual Studio Grid template.
 
-	>**Note:** The Grid application is one of the Visual Studio 2012 available templates for Metro Style applications, which contains three pages. The first page displays a group of items in a grid layout. When a group is clicked, the second page shows the details of the selected group. Finally, when an item is selected, the third page shows the item details.
+	>**Note:** The Grid application is one of the Visual Studio 2012 available templates for Windows 8 Style UI applications, which contains three pages. The first page displays a group of items in a grid layout. When a group is clicked, the second page shows the details of the selected group. Finally, when an item is selected, the third page shows the item details.
 
 	In this solution you will find a simplified Grid template, which only contains group and detail pages with a custom data model for customers.
 
-	![CustomerManager Metro Style Application](images/customermanager-metro-app.png?raw=true "CustomerManager Metro Style Application")
+	![CustomerManager Windows 8 Style UI Application](images/customermanager-metro-app.png?raw=true "CustomerManager Windows 8 Style UI Application")
 
-	_CustomerManager Metro Style Application_
+	_CustomerManager Windows 8 Style UI Application_
 
 	The main application pages are the following ones:
 
@@ -847,9 +847,9 @@ In this task you will explore the Customer client application, built using a Win
 	````
 
 <a name="Ex2Task5" />
-#### Task 5 - Integrating the Web API Service with the Windows 8 Metro Style Application ####
+#### Task 5 - Integrating the Web API Service with the Windows 8 Style UI Application ####
 
-In this task you will bind your Windows 8 Metro Style Application against your customer's model retrieving data from the Web API service. You will start by configuring the binding, and then you will modify the application to call the service asynchronously and display the customers.
+In this task you will bind your Windows 8 Style UI Application against your customer's model retrieving data from the Web API service. You will start by configuring the binding, and then you will modify the application to call the service asynchronously and display the customers.
 
 1. Right-click the **DataModel** project folder in the solution explorer and select **Add | Existing Item**. 
 
@@ -955,7 +955,7 @@ In this task you will bind your Windows 8 Metro Style Application against your c
 <a name="Ex2Task6" />
 #### Task 6 - A Lap Around the Customer Manager Application ####
 
-1. Press **CTRL+SHIFT+B** to build the solution. Make sure the Metro Style application project is selected as the startup project.
+1. Press **CTRL+SHIFT+B** to build the solution. Make sure the Windows 8 Style UI application project is selected as the startup project.
 
 1. Press **F5** to run the solution.
 
@@ -990,7 +990,7 @@ In this task you will bind your Windows 8 Metro Style Application against your c
 ---
 
 <a name="Exercise3" />
-### Exercise 3: Adding Push Notification Support to your Metro Style Application ###
+### Exercise 3: Adding Push Notification Support to your Windows 8 Style UI Application ###
 
 The Windows Push Notification Services (WNS) enables third-party developers to send toast, tile, and badge updates from their own cloud service. This provides a mechanism to deliver new updates to your users in a power-efficient and dependable way.
 
@@ -1008,7 +1008,7 @@ The process of sending a notification requires few steps:
 
 	_WNS Flow Diagram_
 
-In this exercise you will learn how to send a toast notification from the Web API service (cloud service) to the registered clients (Metro Style applications) whenever a new customer is added.
+In this exercise you will learn how to send a toast notification from the Web API service (cloud service) to the registered clients (Windows 8 Style UI applications) whenever a new customer is added.
 
 A toast notification is a transient message to the user that contains relevant, time-sensitive information and provides quick access to related content in an app. It can appear whether you are in another app, the Start screen, the lock screen, or on the desktop. Toasts should be viewed as an invitation to return to your app to follow up on something of interest.
 
@@ -1050,7 +1050,7 @@ In this task you will obtain the information that will be needed to enable your 
 
 1. In the Solution Explorer, open **Package.appxmanifest** from the **CustomerManager.Metro** project.
 
-    > **Note:** The package manifest is an XML document that contains the info the system needs to deploy, display, or update a Metro Style app. This info includes package identity, package dependencies, required capabilities, visual elements, and extensibility points. Every application package must include one package manifest.
+    > **Note:** The package manifest is an XML document that contains the info the system needs to deploy, display, or update a Windows 8 Style UI app. This info includes package identity, package dependencies, required capabilities, visual elements, and extensibility points. Every application package must include one package manifest.
 
 1. Open the **Packaging** tab and take note of the **Package display name** and **Publisher**.
 
@@ -1113,7 +1113,7 @@ In this task you will configure your application  to be capable of raising toast
 
 1. In **Default project** select **CustomerManager.Metro**.
 
-1. Execute the following command to install **Windows8.Notifications** package in the Metro Style application.
+1. Execute the following command to install **Windows8.Notifications** package in the Windows 8 Style UI application.
 
     ````PowerShell
     Install-Package Windows8.Notifications
@@ -1354,7 +1354,7 @@ In this task you will use the class library provided by the **Windows8.Notificat
 	<x:String x:Key="ServiceUrl">[YOUR-SERVICE-SITE-URL]/api/customers</x:String>
 	````
 
-1. Run the Metro Style application.
+1. Run the Windows 8 Style UI application.
 
 1. Create a new customer and notice the toast notification.
 
