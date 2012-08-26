@@ -1,5 +1,5 @@
 ﻿<a name="Title" />
-# Building Windows 8 Applications using Windows Azure #
+# Building Windows 8 Applications using Windows Azure Web Sites #
 
 ---
 <a name="Overview" />
