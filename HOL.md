@@ -1415,6 +1415,18 @@ In this task you will use the class library provided by the **Windows8.Notificat
 
 ---
 
+<a name="Summary"></a>
+## Summary ##
+
+By completing this hands-on lab you have learnt how to use Visual Studio 2012 to:
+
+* Create an ASP.NET MVC 4 Web API service
+* Publish the service to Windows Azure Web Sites
+* Create a Windows 8 Style UI application that consumes the Web API service
+* Add Push Notifications to the Windows 8 Style UI application by using the Windows Azure Toolkit for Windows 8
+
+---
+
 <a name="AppendixA"></a>
 ## Appendix A: Requesting WNS credentials from the Windows Push Notifications & Live Connect Portal ##
 
