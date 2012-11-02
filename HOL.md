@@ -45,6 +45,7 @@ In order to execute the exercises in this hands-on lab you need to set up your e
 
 >**Note:** Make sure you have checked all the dependencies for this lab before running the setup. 
 
+<a name="CodeSnippets"/>
 ### Using the Code Snippets ###
 
 Throughout the lab document, you will be instructed to insert code blocks. For your convenience, most of that code is provided as Visual Studio Code Snippets, which you can use from within Visual Studio 2012 to avoid having to add it manually.
@@ -79,13 +80,13 @@ For that purpose, you will first create a new Azure Web Site in the portal to ho
 
 1. Go to the [Windows Azure Management portal](https://manage.windowsazure.com) and sign in using your **Microsoft Account** credentials associated with your subscription.
 
-	![Log in into Windows Azure portal](images/log-in-into-windows-azure-portal.png?raw=true "Log in into Windows Azure portal")
+	![Log in into Windows Azure portal](Images/log-in-into-windows-azure-portal.png?raw=true "Log in into Windows Azure portal")
 
 	_Log in into Windows Azure portal_
 
 1. Click **New** on the command bar.
 
-	![Creating a new Web Site](images/creating-a-new-web-site.png?raw=true "Creating a new Web Site")
+	![Creating a new Web Site](Images/creating-a-new-web-site.png?raw=true "Creating a new Web Site")
 
 	_Creating a new Web site_
 
@@ -93,29 +94,29 @@ For that purpose, you will first create a new Azure Web Site in the portal to ho
 
 	> **Note:** A Windows Azure Web Site is the host for a web application running in the cloud that you can control and manage. The Quick Create option allows you to deploy a completed web application to the Windows Azure Web Sites from outside the portal. It does not include steps for setting up a database.
 
-	![Creating a new Web Site using Quick Create ](images/creating-a-new-web-site-using-quick-create-op.png?raw=true "Creating a new Web Site using Quick Create")
+	![Creating a new Web Site using Quick Create ](Images/creating-a-new-web-site-using-quick-create-op.png?raw=true "Creating a new Web Site using Quick Create")
 
 	_Creating a new web site using Quick Create_
 
 1. Wait until the new web site is created.
 
-	![Creating new web site status](images/creating-new-web-site-status.png?raw=true "Creating new web site status")
+	![Creating new web site status](Images/creating-new-web-site-status.png?raw=true "Creating new web site status")
 
 	_Creating a new web site - Status_
 
 1. Once the web site is created click the link under the **URL** column to check that it is working.
 
-	![Browsing to the new web site](images/browsing-to-new-site.png?raw=true "Browsing to the new web site")
+	![Browsing to the new web site](Images/browsing-to-new-site.png?raw=true "Browsing to the new web site")
 
 	_Browsing to the new web site_
 
-	![Web site running](images/web-site-running.png?raw=true "Web site running")
+	![Web site running](Images/web-site-running.png?raw=true "Web site running")
 
 	_Web site running_
 
 1. Go back to the portal and click the name of the web site under the **Name** column to display the management pages for the web site.
 
-	![Opening the web site management pages](images/selecting-the-dashboard-tab.png?raw=true "Opening the web site management pages")
+	![Opening the web site management pages](Images/selecting-the-dashboard-tab.png?raw=true "Opening the web site management pages")
 
 	_Opening the web site dashboard_
 
@@ -123,7 +124,7 @@ For that purpose, you will first create a new Azure Web Site in the portal to ho
 
 	> **Note:** The _publish profile_ contains all of the information required to publish a web application to a Windows Azure website for each enabled publication method. The publish profile contains the URLs, user credentials and database strings required to connect to and authenticate against each of the endpoints for which a publication method is enabled. **Microsoft Visual Studio** supports reading publish profiles to automate the publishing configuration for web applications to Windows Azure Web Sites.
 
-	![Downloading the publish profile](images/download-publish-profile.png?raw=true "Downloading the publish profile")
+	![Downloading the publish profile](Images/download-publish-profile.png?raw=true "Downloading the publish profile")
 
 	_Downloading the publish profile_
 
@@ -136,7 +137,7 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 
 1. Open **Visual Studio Express 2012 for Web** and select **File | New Project...** to start a new solution.
 
-	![New Project](images/new-project.png?raw=true "New Project")
+	![New Project](Images/new-project.png?raw=true "New Project")
 
 	_Creating a New Project_
 
@@ -146,19 +147,19 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 
 	>**Note:** At the time this lab was written, Windows Azure Web Sites did not support .NET Framework 4.5.
 
-	![New MVC 4 Project](images/new-mvc4-project.png?raw=true "New MVC 4 Project")
+	![New MVC 4 Project](Images/new-mvc4-project.png?raw=true "New MVC 4 Project")
 
 	_New MVC 4 Project_
 
 1. In the new **ASP.NET MVC 4 Web Application** dialog, select **Web API** and make sure that **Razor** is selected as the view engine.
 
-	![New ASP.NET MVC 4 Web API project](images/new-aspnet-mvc4-webapi-project.png?raw=true "New ASP.NET MVC 4 Web API project")
+	![New ASP.NET MVC 4 Web API project](Images/new-aspnet-mvc4-webapi-project.png?raw=true "New ASP.NET MVC 4 Web API project")
 
 	_New ASP.NET MVC 4 Web API project_
 
 1. You will now explore the structure of an ASP.NET Web API project. Notice that the structure of a Web API project is similar to an MVC 4 Web Application.
 
-	![ASP.NET Web API Project](images/aspnet-webapi-project.png?raw=true "ASP.NET Web API Project")
+	![ASP.NET Web API Project](Images/aspnet-webapi-project.png?raw=true "ASP.NET Web API Project")
 
 	_ASP.NET Web API Project_
 
@@ -199,7 +200,7 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 
 	In the browser, you will be prompted to download a file. Click **Open**. If prompted, choose to open the file with a text editor.
 	
-	![Retrieving the default  values](images/retrieving-the-default-webapi-values.png?raw=true "Retrieving the default values")
+	![Retrieving the default  values](Images/retrieving-the-default-webapi-values.png?raw=true "Retrieving the default values")
 
 	_Retrieving the default values_
 
@@ -208,37 +209,37 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 
 1. In the Solution Explorer, right-click the project node and select **Publish** to open the Publish Web wizard.
 
-	![Publishing the service](images/publishing-the-service.png?raw=true "Publishing the service")
+	![Publishing the service](Images/publishing-the-service.png?raw=true "Publishing the service")
 
 	_Publishing the service_
 
 1. In the **Profile** page, click the **Import** button and select your publish profile file, downloaded previously. Click **Next**.
 
-	![Publishing profile selection](images/publishing-profile-profile-selection.png?raw=true)
+	![Publishing profile selection](Images/publishing-profile-profile-selection.png?raw=true)
 	
 	_Selecting a publishing profile_
 
 1. In the **Connection page**, leave the imported values and click **Next**.
 
-	![Publishing profile imported](images/publishing-profile-imported.png?raw=true "Publishing profile imported")
+	![Publishing profile imported](Images/publishing-profile-imported.png?raw=true "Publishing profile imported")
 
 	_Publish profile imported_
 
 1. In the **Settings** page, leave the default values and click **Next**.
 
-	![Publish Settings page](images/publish-settings-page.png?raw=true "Publish Settings page")
+	![Publish Settings page](Images/publish-settings-page.png?raw=true "Publish Settings page")
 
 	_Publish Settings page_
 
 1. In the **Preview** page, click **Publish**.
 
-	![Publishing a web site](images/publishing-a-web-site.png?raw=true "Publishing a web site")
+	![Publishing a web site](Images/publishing-a-web-site.png?raw=true "Publishing a web site")
 	
 	_Publishing a web site_
 
 1. When the process is completed the published web site will be opened in your default web browser. Go to **/api/values** to retrieve the default values and test that the Web API service is working successfully.
 
-	![Default web service published](images/default-web-service-published.png?raw=true "Default web service published")
+	![Default web service published](Images/default-web-service-published.png?raw=true "Default web service published")
 
 	_Default web service - Published_
 
@@ -251,23 +252,23 @@ In this task you will create a blank Windows 8 Style UI application that will co
 
 1. In the **New Project** dialog, select the **Blank** application under the **Visual C# | Windows Store** applications. Name it _Win8Client_ and click **OK**.
 
-	![Add a new Windows 8 Style UI application basic client project](images/add-new-style-ui-app-basic-client-project.png?raw=true "Add new Windows 8 Style UI application basic client project")
+	![Add a new Windows 8 Style UI application basic client project](Images/add-new-style-ui-app-basic-client-project.png?raw=true "Add new Windows 8 Style UI application basic client project")
 
 	_Add a new Windows 8 Style UI application basic client project_
 
 	> **Note:** If it's the first time you create a Windows Syle UI application you will be prompted to get a developer license for Windows 8 to develop this kind of applications. In the Developer License window, click **I Agree**.
 	
-	> ![Getting a Developer License](images/getting-developer-license.png?raw=true "Getting a Developer License")
+	> ![Getting a Developer License](Images/getting-developer-license.png?raw=true "Getting a Developer License")
 	
 	> You will be requested to sign in using your Microsoft credentials. Do so and click **Sign In**. Now you have a developer license.
 
-	> ![Inserting credentials to obtain a developer license](images/inserting-credentials-developer-license.png?raw=true "Inserting credentials to obtain a developer license")
+	> ![Inserting credentials to obtain a developer license](Images/inserting-credentials-developer-license.png?raw=true "Inserting credentials to obtain a developer license")
 
-	> ![Developer License successfully obtained](images/developer-license-succesfully-obtained.png?raw=true "Developer License successfully obtained")
+	> ![Developer License successfully obtained](Images/developer-license-succesfully-obtained.png?raw=true "Developer License successfully obtained")
 
 1. In the Solution Explorer, right click **MainPage.xaml** file and select **View Code**.
 
-	![View code behind MainPage.xaml](images/main-page-view-code.png?raw=true "View code behind MainPage.xaml")
+	![View code behind MainPage.xaml](Images/main-page-view-code.png?raw=true "View code behind MainPage.xaml")
 
 	_View code behind MainPage.xaml_
 
@@ -347,7 +348,7 @@ In this task you will create a blank Windows 8 Style UI application that will co
 
 	You will see that the values retrieved from the service are listed in the List Box
 
-	![Basic service output](images/basic-service-output.png?raw=true "basic service output")
+	![Basic service output](Images/basic-service-output.png?raw=true "basic service output")
 
 	_Service output_
 
@@ -380,19 +381,19 @@ In this task you will provision a SQL Database server in Windows Azure that will
 
 1. Switch to [Windows Azure Management portal](https://manage.windowsazure.com) and select **SQL Databases** on the left pane, click **Servers** link and select **Add** at the bottom of the page to start creating a SQL Database server.
 
-	![Creating a New SQL Database server](images/creating-a-new-sql-database-server.png?raw=true "Creating a New SQL Database server")
+	![Creating a New SQL Database server](Images/creating-a-new-sql-database-server.png?raw=true "Creating a New SQL Database server")
 
 	_Creating a New SQL Database server_
 
 1. In the **Server Settings** dialog, enter a login name (e.g. User), a password and a region. Leave the default option checked and click the confirmation button to start creating the server.
 
-	![Server settings dialog](images/server-settings-dialog.png?raw=true "Server settings dialog")
+	![Server settings dialog](Images/server-settings-dialog.png?raw=true "Server settings dialog")
 
 	_Server settings dialog_
 
 1. Once the server is created, enter to the server **Dashboard** and copy the server URL from the **Manage URL** value. You will use it later in this lab to configure the Web API service data source.
 
-	![servers-dashboard](images/servers-dashboard.png?raw=true)
+	![servers-dashboard](Images/servers-dashboard.png?raw=true)
 
 	_Server dashboard_
 
@@ -405,19 +406,19 @@ In this task you will add Entity Framework Scaffolding and Code First to an ASP.
 
 1. Add a reference to _System.Runtime.Serialization_. In Solution Explorer, right-click the references folder and select **Add Reference**.
 
-	![Adding a new reference](images/adding-a-new-reference.png?raw=true "Adding a new reference")
+	![Adding a new reference](Images/adding-a-new-reference.png?raw=true "Adding a new reference")
 
 	_Adding a new reference_
 
 1. Select the **Assemblies** section and search for _System.Runtime.Serialization_ and select it. Then click **OK**.
 
-	![Adding a reference ](images/adding-a-reference.png?raw=true "Adding a reference ")
+	![Adding a reference ](Images/adding-a-reference.png?raw=true "Adding a reference ")
 
 	_Adding a reference to System.Runtime.Serialization_
 
 1. Right-click the **Models** folder in the **Solution Explorer** and select **Add | Class**. Name it **Customer.cs**.
 
-	![Adding a model class](images/add-model-class.png?raw=true "Add model class")
+	![Adding a model class](Images/add-model-class.png?raw=true "Add model class")
 
 	_Adding a model class_
 
@@ -472,7 +473,7 @@ In this task you will add Entity Framework Scaffolding and Code First to an ASP.
 
 1. Set **CustomersController** as the controller name. In the **Scaffolding options**, select the **API controller with read/write actions, using Entity Framework** Template, and **Customer** as the Model class.
 
-	![Adding a controller with Scaffolding](images/adding-a-controller-with-scaffolding.png?raw=true "Adding a controller with Scaffolding")
+	![Adding a controller with Scaffolding](Images/adding-a-controller-with-scaffolding.png?raw=true "Adding a controller with Scaffolding")
 
 	_Adding a controller with Scaffolding_
 
@@ -480,7 +481,7 @@ In this task you will add Entity Framework Scaffolding and Code First to an ASP.
 
 1. In the Data context class, select **New data context**. Name the new data context _CustomerContext_ and click **OK**.
 
-	![New customers context](images/new-customers-context.png?raw=true "New customers context")
+	![New customers context](Images/new-customers-context.png?raw=true "New customers context")
 
 	_New customers context_
 
@@ -702,7 +703,7 @@ Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];P
 
 	>**Note:** You can get your **Server URL** from the SQL Database Server **Dashboard** in the Windows Azure Management portal. For simplicity purposes you are using your server administrator user to connect to the database, however in a production scenario it is recommended that you create another SQL Server user.
 	>
-	> ![Server's dashboard](images/servers-dashboard.png?raw=true "Server's dashboard")
+	> ![Server's dashboard](Images/servers-dashboard.png?raw=true "Server's dashboard")
 	
 1. Press **CTRL+S** to save the changes.
 
@@ -733,7 +734,7 @@ In this task you will explore the Customer client application, built using a Win
 
 	In this solution you will find a simplified Grid template, which only contains group and detail pages with a custom data model for customers.
 
-	![CustomerManager Windows 8 Style UI Application](images/customermanager-styleui-app.png?raw=true "CustomerManager Windows 8 Style UI Application")
+	![CustomerManager Windows 8 Style UI Application](Images/customermanager-styleui-app.png?raw=true "CustomerManager Windows 8 Style UI Application")
 
 	_CustomerManager Windows 8 Style UI Application_
 
@@ -847,7 +848,7 @@ In this task you will bind your Windows 8 Style UI Application against your cust
 
 1. Browse to the **WebApi** project, open the **Models** folder and select **Customer.cs**. Click the arrow next to the **Add** button and click **Add as Link**.
 
-	![Adding Customer.cs model class as a link](images/add-customercs-as-an-existing-item.png?raw=true "Adding Customer.cs model class as a link")
+	![Adding Customer.cs model class as a link](Images/add-customercs-as-an-existing-item.png?raw=true "Adding Customer.cs model class as a link")
 
 	_Adding Customer.cs model class as a link_
 
@@ -857,7 +858,7 @@ In this task you will bind your Windows 8 Style UI Application against your cust
 
 	This class will contain the methods that retrieve the customers from the Web API service you have already published on Windows Azure.
 
-	![Adding a new class](images/adding-a-new-class.png?raw=true "Adding a new class")
+	![Adding a new class](Images/adding-a-new-class.png?raw=true "Adding a new class")
 
 	_Adding a new class_
 
@@ -949,7 +950,7 @@ In this task you will bind your Windows 8 Style UI Application against your cust
 
 1. Press **F5** to run the solution.
 
-	![Customer Manager Grid](images/customer-manager-grid.png?raw=true "Customer Manager Grid")
+	![Customer Manager Grid](Images/customer-manager-grid.png?raw=true "Customer Manager Grid")
 
 	_Customer Manager - Grid_
 
@@ -957,19 +958,19 @@ In this task you will bind your Windows 8 Style UI Application against your cust
 
 1. Click the upper left arrow to go back.
 
-	![Customer Details](images/customer-details.png?raw=true "Customer Details")
+	![Customer Details](Images/customer-details.png?raw=true "Customer Details")
 
 	_Customer Details_
 
 1. Back in the Home page, right-click to bring the application bar up and select **Add** to go to the new customer page.
 
-	![Add button](images/add-button.png?raw=true "Add button")
+	![Add button](Images/add-button.png?raw=true "Add button")
 
 	_Add button_
 
 1. Complete the new customer's data and click **Create**.
 
-	![New Customer](images/new-customer.png?raw=true "New Customer")
+	![New Customer](Images/new-customer.png?raw=true "New Customer")
 
 	_New Customer_
 
@@ -994,7 +995,7 @@ The process of sending a notification requires few steps:
 
 1. **Push notification to channel recipient.** Once you have your channel, notification payload and WNS access token you can then perform an HttpWebRequest to post your notification to WNS for delivery to your client.
 
-	![WNS Flow Diagram](images/wns-flow-diagram.png?raw=true "WNS Flow Diagram")
+	![WNS Flow Diagram](Images/wns-flow-diagram.png?raw=true "WNS Flow Diagram")
 
 	_WNS Flow Diagram_
 
@@ -1046,7 +1047,7 @@ In this task you will obtain the information that will be needed to enable your 
 
 1.	Click **Store** in the Visual Studio menu and select **Reserve App Name**.
 
-	![Reserving App Name](./images/reserving-app-name.png?raw=true)
+	![Reserving App Name](./Images/reserving-app-name.png?raw=true)
 
 	_Reserving App Name in Windows Store_
 
@@ -1054,47 +1055,47 @@ In this task you will obtain the information that will be needed to enable your 
 
 	> **Note:** You will have to sign in using your Microsoft Account to access the Windows Store.
 
-	![Giving your app a unique name](./images/giving-app-name-windows-store.png?raw=true)
+	![Giving your app a unique name](./Images/giving-app-name-windows-store.png?raw=true)
 
 	_Giving your app a unique name_
 
 1.	In the App name field, insert the Package Display Name that is inside the **Package.appxmanifest** file of your solution and click **Reserve app name**. Then click **Save** to confirm the reservation.
 
-	![Reserving an app name](./images/app-name-windows-store.png?raw=true)
+	![Reserving an app name](./Images/app-name-windows-store.png?raw=true)
 
 	_Reserving an app name_
 
-	![Confirming the app name reservation](./images/name-reservation-successful-win-store.png?raw=true)
+	![Confirming the app name reservation](./Images/name-reservation-successful-win-store.png?raw=true)
 
 	_Confirming the app name reservation_
 
 1. Now you will have to identify your application to get a name and a publisher to insert in the **Package.appxmanifest** file. In the Submit an app page, click **Advanced features**.
 
-	![Configuring push notifications for the Notifications.Client app](./images/app-name-reverved-completely-windows-store.png?raw=true)
+	![Configuring push notifications for the Notifications.Client app](./Images/app-name-reverved-completely-windows-store.png?raw=true)
 
 	_Configuring push notifications for the Notifications.Client app_
 
 1. In the Advanced features page, click **Push notifications and Live Connect services info**.
 
-	![Advanced features page](./images/push-notif-live-connect-service-info.png?raw=true)
+	![Advanced features page](./Images/push-notif-live-connect-service-info.png?raw=true)
 
 	_Advanced features page_
 
 1. Once in the Push notifications and Live Connect services info section, click **Identifying your app**.
 
-	![Push notifications Overview page](./images/identifying-your-app.png?raw=true)
+	![Push notifications Overview page](./Images/identifying-your-app.png?raw=true)
 
 	_Push notifications Overview page_
 
 1. Now we have to set the Identity Name and Publisher of our **Package.appxmanifest** file with the information in Windows Store. Go back to Visual Studio, right-click the **Package.appxmanifest** and select **View Code**. Replace the Name and Publisher attributes of the Identity element with the ones obtained in Windows Store. Click **Authenticating your service**.
 
-	![Setting Identity Name and Publisher](./images/app-identification.png?raw=true)
+	![Setting Identity Name and Publisher](./Images/app-identification.png?raw=true)
 
 	_Setting Identity Name and Publisher_
 
 1. Finally we obtained a **Package Security Identifier (SID)** and a **Client secret**, which are the WNS Credentials that we need to update the Web configuration of our Notification App Server.
 
-	![Package Security Identifier (SID) and Client secret](./images/sid-client-secret.png?raw=true)
+	![Package Security Identifier (SID) and Client secret](./Images/sid-client-secret.png?raw=true)
 
 	_Package Security Identifier (SID) and Client secret_
 
@@ -1110,7 +1111,7 @@ In this task you will configure your application  to be capable of raising toast
 
 1. Find the **Notifications** section and set **Yes** for **Toast capable**.
 
-    ![Enabling toast notifications](images/enabling-toast-notifications.png?raw=true "Enabling toast notifications")
+    ![Enabling toast notifications](Images/enabling-toast-notifications.png?raw=true "Enabling toast notifications")
 
     _Enabling toast notifications_
 
@@ -1119,37 +1120,39 @@ In this task you will configure your application  to be capable of raising toast
     - Internet (Client & Server)
     - Private Networks (Client & Server)
 
-    ![Enabling network capabilities](images/enabling-network-capabilities.png?raw=true "Enabling network capabilities")
+    ![Enabling network capabilities](Images/enabling-network-capabilities.png?raw=true "Enabling network capabilities")
 
     _Enabling network capabilities_
 
+	> **Note:** In the following steps you will associate your application with the Windows Store. If you obtained your WNS credentials from the Windows Push Notifications & Live Connect Portal, you can skip the next 5 steps.
+
 1.	Click **Store** in the Visual Studio menu and select **Associate App with the Store**.
 
-	![Associating App with Store](./images/associating-app-with-store.png?raw=true)
+	![Associating App with Store](./Images/associating-app-with-store.png?raw=true)
 
 	_Associating App with Store_
 
 1. In the Associate Your App with the Windows Store wizard, click **Sign In**.
 
-	![Associating App with Store Wizard](./images/associate-app-with-store.png?raw=true)
+	![Associating App with Store Wizard](./Images/associate-app-with-store.png?raw=true)
 
 	_Associating App with Store Wizard_
 
 1. Enter your credentials and click **Sign In**.
 
-	![Inserting your credentials to assciate your app in Windows Store](./images/sign-in-for-association.png?raw=true)
+	![Inserting your credentials to assciate your app in Windows Store](./Images/sign-in-for-association.png?raw=true)
 
 	_Inserting your credentials to assciate your app in Windows Store_
 
 1. In the Select an app name step, select **Notifications.Client** and click **Next**.
 
-	![Selecting your app name](./images/selecting-app-name.png?raw=true)
+	![Selecting your app name](./Images/selecting-app-name.png?raw=true)
 
 	_Selecting your app name_
 
 1. Take a look at the summary of the values that will be added in the manifest file. Click **Associate**. 
 
-	![Associating your app with the Windows Store Summary](./images/association-summary.png?raw=true)
+	![Associating your app with the Windows Store Summary](./Images/association-summary.png?raw=true)
 
 	_Associating your app with the Windows Store Summary_
 
@@ -1260,7 +1263,7 @@ The WNS authentication scheme is implemented using the client credentials profil
 	}
     ````
  
-1. Open the **Web.config** file and add the following settings in the `appSettings` section. Replace the placeholders using the values from the Windows Developer Center obtained on the first task.
+1. Open the **Web.config** file and add the following settings in the `appSettings` section. Replace the placeholders using the values that you obtained either from the Windows Store or from the Windows Push Notifications & Live Connect Portal.
 
     <!-- mark:2-3 -->
     ````XML
@@ -1405,8 +1408,20 @@ In this task you will use the class library provided by the **Windows8.Notificat
 
 1. Create a new customer and notice the toast notification.
 
-    ![Toast notification](images/toast-notification.png?raw=true "Toast notification")
+    ![Toast notification](Images/toast-notification.png?raw=true "Toast notification")
 
     _Toast notification_
+
+---
+
+<a name="Summary"></a>
+## Summary ##
+
+By completing this hands-on lab you have learnt how to use Visual Studio 2012 to:
+
+* Create an ASP.NET MVC 4 Web API service
+* Publish the service to Windows Azure Web Sites
+* Create a Windows 8 Style UI application that consumes the Web API service
+* Add Push Notifications to the Windows 8 Style UI application by using the Windows Azure Toolkit for Windows 8
 
 ---
