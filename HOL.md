@@ -5,9 +5,9 @@
 <a name="Overview" />
 ## Overview ##
 
-Apps are at the center of the Windows 8 experience. They’re alive with activity and vibrant content. Users are immersed in your full-screen, Windows 8 Style UI apps, where they can focus on their content, rather than on the operating system.
+Apps are at the center of the Windows 8 experience. They’re alive with activity and vibrant content. Users are immersed in your full-screen, Windows Store apps, where they can focus on their content, rather than on the operating system.
 
-In this hands-on lab you will learn how to combine the fluency of Windows 8 applications with the power of Windows Azure: From a Windows Windows 8 Style UI application, you will consume an ASP.NET MVC 4 Web API service published in Windows Azure Web Sites, and store your data in a Windows Azure SQL Database. In addition, you will learn how to configure the Windows Push Notification Services (WNS) in your app to send toast notifications from your service to all the registered clients.
+In this hands-on lab you will learn how to combine the fluency of Windows 8 applications with the power of Windows Azure: From a Windows Store application, you will consume an ASP.NET MVC 4 Web API service published in Windows Azure Web Sites, and store your data in a Windows Azure SQL Database. In addition, you will learn how to configure the Windows Push Notification Services (WNS) in your app to send toast notifications from your service to all the registered clients.
 
 <a name="Objectives" />
 ### Objectives ###
@@ -16,23 +16,21 @@ In this hands-on lab, you will learn how to use Visual Studio 2012 to:
 
 * Create an ASP.NET MVC 4 Web API service
 * Publish the service to Windows Azure Web Sites
-* Create a Windows 8 Style UI application that consumes the Web API service
-* Add Push Notifications to the Windows 8 Style UI application by using the Windows Azure Toolkit for Windows 8
+* Create a Windows Store application that consumes the Web API service
+* Add Push Notifications to the Windows Store application by using the Windows Azure Toolkit for Windows 8
 
 <a name="Prerequisites" />
 ### Prerequisites ###
 
 The following is required to complete this hands-on lab:
 
-- [Visual Studio Express 2012 for Web][1] or greater.
-- [Visual Studio 2012 Express for Windows 8][2] or greater.
+- [Visual Studio Express 2012 for Web][1] or greater
+- [Visual Studio 2012 Express for Windows 8][2] or greater
 - A Windows Azure subscription with the Web Sites Preview enabled - [sign up for a free trial][3]
 
 [1]:http://www.microsoft.com/visualstudio/
 [2]:http://msdn.microsoft.com/en-us/windows/apps/hh852659
 [3]:http://aka.ms/WATK-FreeTrial
-
->**Note:** This lab was designed to use Windows 8 Operating System.
 
 <a name="Setup"/>
 ### Setup ###
@@ -56,27 +54,101 @@ Throughout the lab document, you will be instructed to insert code blocks. For y
 
 This hands-on lab includes the following exercises:
 
-1. [Building and Consuming an ASP.NET Web API from a Windows 8 Style UI App](#Exercise1)
+1. [Building and Consuming an ASP.NET Web API from a Windows Store App](#Exercise1)
 1. [Basic Data Binding and Data Access Using Windows Azure SQL Databases and Entity Framework Code First](#Exercise2)
-1. [Adding Push Notification Support to your Windows 8 Style UI Application](#Exercise3)
+1. [Adding Push Notification Support to your Windows Store Application](#Exercise3)
 
 > **Note:** Each exercise is accompanied by a starting solution located in the Begin folder of the exercise that allows you to follow each exercise independently of the others. Please be aware that the code snippets that are added during an exercise are missing from these starting solutions and that they will not necessarily work until you complete the exercise.
 >
 >Inside the source code for an exercise, you will also find an End folder containing a Visual Studio solution with the code that results from completing the steps in the corresponding exercise. You can use these solutions as guidance if you need additional help as you work through this hands-on lab.
 
 <a name="Exercise1" />
-### Exercise 1: Building and Consuming an ASP.NET Web API from a Windows 8 Style UI App ###
+### Exercise 1: Building and Consuming an ASP.NET Web API from a Windows Store App ###
 
 ASP.NET Web API is a new framework from MVC 4 that facilitates to build and consume HTTP services for a wide range of clients.
 
-In this exercise you will learn the basics of consuming an ASP.NET MVC 4 Web API REST service - hosted in Windows Azure Web Sites - from a Windows 8 Style UI application. 
+In this exercise you will learn the basics of consuming an ASP.NET MVC 4 Web API REST service - hosted in Windows Azure Web Sites - from a Windows Store application. 
 
-For that purpose, you will first create a new Azure Web Site in the portal to host the service. Then, you will create a new ASP.NET MVC 4 Web API project and publish it in Windows Azure from Visual Studio. Once the default service is published, you will create a basic Windows 8 Style UI client application with a simple list to retrieve the service values.
+For that purpose, you will first create a new Azure Web Site in the portal to host the service. Then, you will create a new ASP.NET MVC 4 Web API project and publish it in Windows Azure from Visual Studio. Once the default service is published, you will create a basic Windows Store client application with a simple list to retrieve the service values.
 
 > **Note:** If you are using Visual Studio 2012 Professional or higher, you are provided with a solution named **End.All.sln** with the Web Api and the StyleUI projects together in the **Source/Ex1-BuildingWebAPI/End** folder of this lab.
 
+
 <a name="Ex1Task1" />
-#### Task 1 – Creating a New Web Site Hosted in Windows Azure ####
+#### Task 1 – Creating an MVC 4 Web API Service ####
+
+In this task you will create a new MVC 4 Web API project and explore its components. 
+
+>**Note:** You can learn more about ASP.NET Web API  [here](http://www.asp.net/web-api).
+
+1. Open **Visual Studio Express 2012 for Web** and select **File | New Project...** to start a new solution.
+
+	![New Project](Images/new-project.png?raw=true "New Project")
+
+	_Creating a New Project_
+
+1. In the **New Project** dialog, select **ASP.NET MVC 4 Web Application** under the **Visual C# | Web** tab. 
+
+	Make sure the **.NET Framework 4.5** is selected, name it _WebApi_, choose a Location and click **OK**.
+
+	![New MVC 4 Project](Images/new-mvc4-project.png?raw=true "New MVC 4 Project")
+
+	_New MVC 4 Project_
+
+1. In the new **ASP.NET MVC 4 Web Application** dialog, select **Web API** and make sure that **Razor** is selected as the view engine.
+
+	![New ASP.NET MVC 4 Web API project](Images/new-aspnet-mvc4-webapi-project.png?raw=true "New ASP.NET MVC 4 Web API project")
+
+	_New ASP.NET MVC 4 Web API project_
+
+1. You will now explore the structure of an ASP.NET Web API project. Notice that the structure of a Web API project is similar to an MVC 4 Web Application.
+
+	![ASP.NET Web API Project](Images/aspnet-webapi-project.png?raw=true "ASP.NET Web API Project")
+
+	_ASP.NET Web API Project_
+
+	1. **Controllers:**  A controller is an object that handles HTTP requests. If you have worked with ASP.NET MVC, you will notice that they work similarly in Web API, but controllers in Web API derive from the ApiController instead of Controller Class. The first major difference is that actions on Web API controllers return data instead of views.
+		The New Project wizard created two other controllers for you when it created the project: Home and Values. 
+	
+		-The **Home** controller is responsible for serving HTML pages for the site, and is not directly related to Web API. 
+
+		-The **Values** Controller is an example of a Web API controller. 
+
+	1. **Models**: In this folder you will place the classes that represent the data in your application. ASP.NET Web API can automatically serialize your model to JSON, XML, or some other format, and then write the serialized data into the body of the HTTP response message. 
+
+	1. **Routing:** To determine which action to invoke, the framework uses a routing table configured in App_Start/RouteConfig.cs. The project template creates a default HTTP route named "Default".
+		
+		````C#
+		routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+		````
+
+		When the Web API framework receives an HTTP request, it tries to match the URI against one of the route templates in the routing table. Once a matching route is found, Web API selects the controller and the action. For instance, these URIs match the default route:
+
+		-/api/values/
+
+		-/api/values/1
+			
+			
+		>**Note:** The reason for using an 'api' prefix in the route is to prevent collisions with ASP.NET MVC routing, which manages views in the same namespace. That way, you can have a "values" view and a "values" action method at the same time. However, you can change the default prefix and use your own routes. 
+
+1. Press **F5** to run the solution or, alternatively, click the **Start** button located on the toolbar to run the solution. The Web API template home page will open.
+
+	> **Note:** If the web application is not displayed after the deployment, try refreshing the browser a couple of times.
+
+1. In the browser, go to **/api/values** to retrieve the JSON output of the sample service. 
+
+	In the browser, you will be prompted to download a file. Click **Open**. If prompted, choose to open the file with a text editor.
+	
+	![Retrieving the default  values](Images/retrieving-the-default-webapi-values.png?raw=true "Retrieving the default values")
+
+	_Retrieving the default values_
+
+<a name="Ex1Task2" />
+#### Task 2 – Creating a New Web Site Hosted in Windows Azure ####
 
 1. Go to the [Windows Azure Management portal](https://manage.windowsazure.com) and sign in using your **Microsoft Account** credentials associated with your subscription.
 
@@ -128,82 +200,6 @@ For that purpose, you will first create a new Azure Web Site in the portal to ho
 
 	_Downloading the publish profile_
 
-<a name="Ex1Task2" />
-#### Task 2 – Creating an MVC 4 Web API Service ####
-
-In this task you will create a new MVC 4 Web API project and explore its components. 
-
->**Note:** You can learn more about ASP.NET Web API  [here](http://www.asp.net/web-api).
-
-1. Open **Visual Studio Express 2012 for Web** and select **File | New Project...** to start a new solution.
-
-	![New Project](Images/new-project.png?raw=true "New Project")
-
-	_Creating a New Project_
-
-1. In the **New Project** dialog, select **ASP.NET MVC 4 Web Application** under the **Visual C# | Web** tab. 
-
-	Make sure the **.NET Framework 4** is selected, name it _WebApi_, choose a Location and click **OK**.
-
-	>**Note:** At the time this lab was written, Windows Azure Web Sites did not support .NET Framework 4.5.
-
-	![New MVC 4 Project](Images/new-mvc4-project.png?raw=true "New MVC 4 Project")
-
-	_New MVC 4 Project_
-
-1. In the new **ASP.NET MVC 4 Web Application** dialog, select **Web API** and make sure that **Razor** is selected as the view engine.
-
-	![New ASP.NET MVC 4 Web API project](Images/new-aspnet-mvc4-webapi-project.png?raw=true "New ASP.NET MVC 4 Web API project")
-
-	_New ASP.NET MVC 4 Web API project_
-
-1. You will now explore the structure of an ASP.NET Web API project. Notice that the structure of a Web API project is similar to an MVC 4 Web Application.
-
-	![ASP.NET Web API Project](Images/aspnet-webapi-project.png?raw=true "ASP.NET Web API Project")
-
-	_ASP.NET Web API Project_
-
-	1. **Controllers:**  A controller is an object that handles HTTP requests. If you have worked with ASP.NET MVC, you will notice that they work similarly in Web API, but controllers in Web API derive from the ApiController instead of Controller Class. The first major difference is that actions on Web API controllers return data instead of views.
-		The New Project wizard created two other controllers for you when it created the project: Home and Values. 
-	
-		-The **Home** controller is responsible for serving HTML pages for the site, and is not directly related to Web API. 
-
-		-The **Values** Controller is an example of a Web API controller. 
-
-	1. **Models**: In this folder you will place the classes that represent the data in your application. ASP.NET Web API can automatically serialize your model to JSON, XML, or some other format, and then write the serialized data into the body of the HTTP response message. 
-
-	1. **Routing:** To determine which action to invoke, the framework uses a routing table configured in App_Start/RouteConfig.cs. The project template creates a default HTTP route named "Default".
-		
-		````C#
-		routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-		````
-
-		When the Web API framework receives an HTTP request, it tries to match the URI against one of the route templates in the routing table. Once a matching route is found, Web API selects the controller and the action. For instance, these URIs match the default route:
-
-		-/api/values/
-
-		-/api/values/1
-			
-			
-		>**Note:**The reason for using an 'api' prefix in the route is to prevent collisions with ASP.NET MVC routing, which manages views in the same namespace. That way, you can have a "values" view and a "values" action method at the same time. However, you can change the default prefix and use your own routes. 
-
-		
-1. Press **F5** to run the solution or, alternatively, click the **Start** button located on the toolbar to run the solution. The Web API template home page will open.
-
-	> **Note:** If the web application is not displayed after the deployment, try refreshing the browser a couple of times.
-
-1. In the browser, go to **/api/values** to retrieve the JSON output of the sample service. 
-
-	In the browser, you will be prompted to download a file. Click **Open**. If prompted, choose to open the file with a text editor.
-	
-	![Retrieving the default  values](Images/retrieving-the-default-webapi-values.png?raw=true "Retrieving the default values")
-
-	_Retrieving the default values_
-
 <a name="Ex1Task3" />
 #### Task 3 – Publishing the Web API Service to Windows Azure Web Sites ####
 
@@ -213,7 +209,7 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 
 	_Publishing the service_
 
-1. In the **Profile** page, click the **Import** button and select your publish profile file, downloaded previously. Click **Next**.
+1. In the **Profile** page, click the **Import** button. Select to **Import from a publish profile file**, and select your file, downloaded previously. Click **Next**.
 
 	![Publishing profile selection](Images/publishing-profile-profile-selection.png?raw=true)
 	
@@ -244,17 +240,17 @@ In this task you will create a new MVC 4 Web API project and explore its compone
 	_Default web service - Published_
 
 <a name="Ex1Task4" />
-#### Task 4 – Creating a Windows 8 Style UI Client Application ####
+#### Task 4 – Creating a Windows Store Client Application ####
 
-In this task you will create a blank Windows 8 Style UI application that will consume the service you have already running.
+In this task you will create a blank Windows Store application that will consume the service you have already running.
 
 1. Open **Visual Studio Express 2012 for Windows 8** and select **File | New Project...** to start a new solution.
 
 1. In the **New Project** dialog, select the **Blank** application under the **Visual C# | Windows Store** applications. Name it _Win8Client_ and click **OK**.
 
-	![Add a new Windows 8 Style UI application basic client project](Images/add-new-style-ui-app-basic-client-project.png?raw=true "Add new Windows 8 Style UI application basic client project")
+	![Add a new Windows Store application basic client project](Images/add-new-style-ui-app-basic-client-project.png?raw=true "Add new Windows Store application basic client project")
 
-	_Add a new Windows 8 Style UI application basic client project_
+	_Add a new Windows Store application basic client project_
 
 	> **Note:** If it's the first time you create a Windows Syle UI application you will be prompted to get a developer license for Windows 8 to develop this kind of applications. In the Developer License window, click **I Agree**.
 	
@@ -266,13 +262,13 @@ In this task you will create a blank Windows 8 Style UI application that will co
 
 	> ![Developer License successfully obtained](Images/developer-license-succesfully-obtained.png?raw=true "Developer License successfully obtained")
 
-1. In the Solution Explorer, right click **MainPage.xaml** file and select **View Code**.
+1. In the Solution Explorer, right-click **MainPage.xaml** file and select **View Code**.
 
 	![View code behind MainPage.xaml](Images/main-page-view-code.png?raw=true "View code behind MainPage.xaml")
 
 	_View code behind MainPage.xaml_
 
-1. In **MainPage.xaml.cs**, add a reference to the Windows.Data.Json assembly:
+1. In **MainPage.xaml.cs**, add a reference to the **Windows.Data.Json** assembly.
 
 	<!-- mark:1 -->
 	````C#
@@ -344,7 +340,7 @@ In this task you will create a blank Windows 8 Style UI application that will co
 	</Grid>
 	````
 
-1. Make sure the Windows 8 Style UI application is the start up project and press **F5** to run the solution. 
+1. Make sure the Windows Store application is the start up project and press **F5** to run the solution. 
 
 	You will see that the values retrieved from the service are listed in the List Box
 
@@ -357,10 +353,10 @@ In this task you will create a blank Windows 8 Style UI application that will co
 <a name="Exercise2" />
 ### Exercise 2: Basic Data Binding and Data Access Using Windows Azure SQL Databases and Entity Framework Code First ###
 
-In this exercise, you will learn how to bind your Windows 8 Style UI application to an ASP.NET Web API service which is using Code First to generate the database from the model in SQL Database.
+In this exercise, you will learn how to bind your Windows Store application to an ASP.NET Web API service which is using Code First to generate the database from the model in SQL Database.
 
 You will start the exercise provisioning a new SQL Database. Then, you will create a new ASP.NET Web API service and use Entity Framework Scaffolding with Code First to generate the service methods and a database in SQL Database.
-Finally, you will explore and customize your Windows 8 Style UI application to consume the service and show a customer list.
+Finally, you will explore and customize your Windows Store application to consume the service and show a customer list.
 
 > **Note:** If you are using Visual Studio 2012 Professional or higher, you are provided with two solutions named **Begin.All.sln** and **End.All.sln** with the Web Api and the StyleUI projects together in the **Source/Ex2-DataAccess/Begin** and **Source/Ex2-DataAccess/End** respective folders of this lab.
 
@@ -402,7 +398,7 @@ In this task you will provision a SQL Database server in Windows Azure that will
 
 In this task you will add Entity Framework Scaffolding and Code First to an ASP.NET Web API service. At the end of this task, you will have a basic API service that performs CRUD operations (Create, Read, Update and Delete) implemented and published in Windows Azure Web Sites.
 
-1. Open **Visual Studio Express 2012 for Web** and open the ***WebApi.sln*** solution located under ***Source/Ex2-DataAccess/Begin/WebApi*** folder. Alternatively, you may continue with the solution that you obtained after completing the previous exercise.
+1. Open **Visual Studio Express 2012 for Web** and open the ***WebApi.sln*** solution located under ***Source/Ex2-DataAccess/Begin*** folder. Alternatively, you may continue with the solution that you obtained after completing the previous exercise.
 
 1. Add a reference to _System.Runtime.Serialization_. In Solution Explorer, right-click the references folder and select **Add Reference**.
 
@@ -463,7 +459,7 @@ In this task you will add Entity Framework Scaffolding and Code First to an ASP.
 	}
 	````
 	
-	>**Note:** You are adding **DataContract** and **DataMember** annotations to the class and its attributes because the Windows 8 Style UI client application is using DataContractJSONSerializer object to read and serialize the customers to JSON. 
+	>**Note:** You are adding **DataContract** and **DataMember** annotations to the class and its attributes because the Windows Store client application is using DataContractJSONSerializer object to read and serialize the customers to JSON. 
 
 1. In Solution Explorer, right-click the WebApi project and select **Build**.
 
@@ -487,24 +483,19 @@ In this task you will add Entity Framework Scaffolding and Code First to an ASP.
 
 1. Click **Add** to add the controller. By using the 'API controller with read/write actions and Entity Framework' template, the CRUD operations for customers will be automatically generated in the Web API service.
 
-1. Once the controller with scaffolding is created, open CustomersController. Notice that the following CRUD actions were added:
-	
-	-DeleteCustomer(int id)
-
-	-GetCustomer(int id)
-
-	-GetCustomers()
-
-	-PostCustomer(Customer customer)
-	
-	-PutCustomer(int id, Customer customer)
+1. Once the controller with scaffolding is created, open **CustomersController.cs**. Notice that the following CRUD actions were added:
+	- DeleteCustomer(int id)
+	- GetCustomer(int id)
+	- GetCustomers()
+	- PostCustomer(Customer customer)	
+	- PutCustomer(int id, Customer customer)
 
 	Notice that each operation has the HTTP verb as a prefix in the name (Delete, Get, Post, etc.).
 
-1. Now, you will add a database initializer method in your database context to populate the database with initial data. Add the following **CustomerContextInitializer** class in CustomerContext.cs file after CustomerContext class, and save the changes.
+1. Now, you will add a database initializer method in your database context to populate the database with initial data. Add the following **CustomerContextInitializer** class in **CustomerContext.cs** file (under the **Models** folder) after **CustomerContext** class, and save the changes.
 
 	(Code Snippet - _Building Windows 8 Apps - Ex2 - Context Initializer_)
-	<!-- mark:15-19 -->
+	<!-- mark:13-19 -->
 	````C#
 	using System.Data.Entity;
 
@@ -677,20 +668,14 @@ In this task you will first replace the connection string to use a SQL Database,
 	You will now replace the default CustomerContext connection string, which is using LocalDB, to target your SQL Database server. To do this, replace the **connectionString** value of the **CustomerContext** connection string with the following value. Replace the placeholders as follows: 
 
 	>**Note**: LocalDB is a version of SQL Server Express, installed by default with Visual Studio 2012 and created specifically for developers. It is very easy to install and requires no management, yet it offers the same T-SQL language, programming surface and client-side providers as the regular SQL Server Express. 
-
-	-**Server  URL:** Complete this value with your server URL. For example: eswngivxru.database.windows.net
-
-	-**Server Name**: This is your server name. For example: eswngivxru
-
-	-**Server Admin User:** Use your server's administrator login.
-
-	-**Password:** Use your server's administrator password.
-
-	-**Database:** Make sure the Initial Catalog value does **NOT** match the name of any existing database in your server. Entity Framework Code First will create the database for you.
+	- **Server  URL:** Complete this value with your server URL. For example: eswngivxru.database.windows.net
+	- **Server Name**: This is your server name. For example: eswngivxru
+	- **Server Admin User:** Use your server's administrator login.
+	- **Password:** Use your server's administrator password.
+	- **Database:** Make sure the Initial Catalog value does **NOT** match the name of any existing database in your server. Entity Framework Code First will create the database for you.
 
 	````XML
 Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];Password=[SERVER_ADMIN_PASSWORD];Trusted_Connection=False;Encrypt=True;Connection Timeout=30;
-
 	````	
 	
 	For example:
@@ -698,7 +683,6 @@ Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];P
 	`````XML
 	<add name="CustomerContext" connectionString="Server=tcp:[YOUR-SERVER-NAME].database.windows.net,1433;Database=CustomersDB;User ID=[YOUR-SERVER-USERNAME];Password=[YOUR-SERVER-PASSWORD];Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"
       providerName="System.Data.SqlClient" />
-
 	```
 
 	>**Note:** You can get your **Server URL** from the SQL Database Server **Dashboard** in the Windows Azure Management portal. For simplicity purposes you are using your server administrator user to connect to the database, however in a production scenario it is recommended that you create another SQL Server user.
@@ -707,9 +691,7 @@ Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];P
 	
 1. Press **CTRL+S** to save the changes.
 
-1. Now that the connection string is targeting your SQL Database, you will publish the service in Windows Azure Web Sites. 
-
-1. Follow the steps in [Task 1 from Exercise 1](#Ex1Task1) to create a new Windows Azure Web Site. You can delete the one created in exercise 1 if you want. Also download its publish profile.
+1. Now that the connection string is targeting your SQL Database, you will publish the service in Windows Azure Web Sites. Follow the steps in [Task 1 from Exercise 1](#Ex1Task1) to create a new Windows Azure Web Site. You can delete the one created in exercise 1 if you want. Also download its publish profile.
 
 1. Back in Visual Studio, right-click the Web API service project in the Solution Explorer, and select **Publish**.
 
@@ -719,33 +701,33 @@ Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];P
 
 1. In the browser opened, go to **/api/customers** to retrieve the full list of customers.
 
+	![Testing the Customers Web API](images/testing-the-customers-web-api.png?raw=true "Testing the Customers Web API")
+
+	_Testing the Customers Web API_
+
 	>**Note:** Entity Framework will create the database the first time you run the application. You can also access the database tables in Windows Azure portal and check if the data was added.
 
 <a name="Ex2Task4" />
-#### Task 4 - Exploring the Windows 8 Style UI Application ####
+#### Task 4 - Exploring the Windows Store Application ####
 
-In this task you will explore the Customer client application, built using a Windows 8 Style UI application Grid Template. You will perform a brief lap around and learn about the main components of a Style UI Grid application.
+In this task you will explore the Customer client application, built using a Windows Store application Grid Template. You will perform a brief lap around and learn about the main components of a Style UI Grid application.
 
-1. Open **Visual Studio Express 2012 for Windows 8** and open the **CustomerManager.sln** solution located under **Source/Ex2-DataAccess/Begin/CustomerManager** folder.
+1. Open **Visual Studio Express 2012 for Windows 8** and open the **CustomerManager.sln** solution located under **Source/Ex2-DataAccess/Begin** folder.
 
-1. This is a client Windows 8 Style UI application that displays customers. It is based on the Visual Studio Grid template.
+1. This is a client Windows Store application that displays customers. It is based on the Visual Studio Grid template.
 
-	>**Note:** The Grid application is one of the Visual Studio 2012 available templates for Windows 8 Style UI applications, which contains three pages. The first page displays a group of items in a grid layout. When a group is clicked, the second page shows the details of the selected group. Finally, when an item is selected, the third page shows the item details.
+	>**Note:** The Grid application is one of the Visual Studio 2012 available templates for Windows Store applications, which contains three pages. The first page displays a group of items in a grid layout. When a group is clicked, the second page shows the details of the selected group. Finally, when an item is selected, the third page shows the item details.
 
 	In this solution you will find a simplified Grid template, which only contains group and detail pages with a custom data model for customers.
 
-	![CustomerManager Windows 8 Style UI Application](Images/customermanager-styleui-app.png?raw=true "CustomerManager Windows 8 Style UI Application")
+	![CustomerManager Windows Store Application](Images/customermanager-styleui-app.png?raw=true "CustomerManager Windows Store Application")
 
-	_CustomerManager Windows 8 Style UI Application_
+	_CustomerManager Windows Store Application_
 
 	The main application pages are the following ones:
-
-	-_GroupedCustomersPage:_ Shows the customers in a grid layout
-
-	-_CustomerDetailPage:_ Shows customer's details
-
-	-_NewCustomerPage:_ Adds a new customer
-
+	- _GroupedCustomersPage:_ Shows the customers in a grid layout
+	- _CustomerDetailPage:_ Shows customer's details
+	- _NewCustomerPage:_ Adds a new customer
 
 1. Expand the **ViewModels** folder and open **GroupedCustomersViewModel.cs**. 
 
@@ -780,7 +762,7 @@ In this task you will explore the Customer client application, built using a Win
 
 	> **Note:** The Windows Runtime now supports using ObservableCollection to set up dynamic bindings so that insertions or deletions in the collection update the UI automatically.
 
-	The GroupedCustomersPage.cs code-behind declares, initializes and binds the view model as follows.
+	The **GroupedCustomersPage.cs** code-behind declares, initializes and binds the view model as follows.
 
 	````C#
 	...
@@ -840,9 +822,9 @@ In this task you will explore the Customer client application, built using a Win
 	````
 
 <a name="Ex2Task5" />
-#### Task 5 - Integrating the Web API Service with the Windows 8 Style UI Application ####
+#### Task 5 - Integrating the Web API Service with the Windows Store Application ####
 
-In this task you will bind your Windows 8 Style UI Application against your customer's model retrieving data from the Web API service. You will start by configuring the binding, and then you will modify the application to call the service asynchronously and display the customers.
+In this task you will bind your Windows Store Application against your customer's model retrieving data from the Web API service. You will start by configuring the binding, and then you will modify the application to call the service asynchronously and display the customers.
 
 1. Right-click the **DataModel** project folder in the solution explorer and select **Add | Existing Item**. 
 
@@ -974,14 +956,14 @@ In this task you will bind your Windows 8 Style UI Application against your cust
 
 	_New Customer_
 
-1. Back in the Home page, you will see the new customer added.
+1. Back in the home page, you will see the new customer added.
 
 	>**Note:** If you cannot see the new customer added, go to the details page and come back to the home page. As the CreateCustomer method is asynchronous, to avoid blocking the UI, the GetCustomers method might execute before the new customer is posted to the service.
 
 ---
 
 <a name="Exercise3" />
-### Exercise 3: Adding Push Notification Support to your Windows 8 Style UI Application ###
+### Exercise 3: Adding Push Notification Support to your Windows Store Application ###
 
 The Windows Push Notification Services (WNS) enables third-party developers to send toast, tile, and badge updates from their own web site. This provides a mechanism to deliver new updates to your users in a power-efficient and dependable way.
 
@@ -999,7 +981,7 @@ The process of sending a notification requires few steps:
 
 	_WNS Flow Diagram_
 
-In this exercise you will learn how to send a toast notification from the Web API service (Web Site) to the registered clients (Windows 8 Style UI applications) whenever a new customer is added.
+In this exercise you will learn how to send a toast notification from the Web API service (Web Site) to the registered clients (Windows Store applications) whenever a new customer is added.
 
 A toast notification is a transient message to the user that contains relevant, time-sensitive information and provides quick access to related content in an app. It can appear whether you are in another app, the Start screen, the lock screen, or on the desktop. Toasts should be viewed as an invitation to return to your app to follow up on something of interest.
 
@@ -1043,7 +1025,7 @@ In this task you will obtain the information that will be needed to enable your 
 
 1. In the **CustomerManager** begin solution, open **Package.appxmanifest**.
 
-    > **Note:** The package manifest is an XML document that contains the info the system needs to deploy, display, or update a Windows 8 Style UI app. This info includes package identity, package dependencies, required capabilities, visual elements, and extensibility points. Every application package must include one package manifest.
+    > **Note:** The package manifest is an XML document that contains the info the system needs to deploy, display, or update a Windows Store app. This info includes package identity, package dependencies, required capabilities, visual elements, and extensibility points. Every application package must include one package manifest.
 
 1.	Click **Store** in the Visual Studio menu and select **Reserve App Name**.
 
@@ -1160,7 +1142,7 @@ In this task you will configure your application  to be capable of raising toast
 
 1. In **Default project** make sure **CustomerManager.StyleUI** is selected.
 
-1. Execute the following command to install **Windows8.Notifications** package in the Windows 8 Style UI application.
+1. Execute the following command to install **Windows8.Notifications** package in the Windows Store application.
 
     ````PowerShell
     Install-Package Windows8.Notifications
@@ -1404,7 +1386,7 @@ In this task you will use the class library provided by the **Windows8.Notificat
 	<x:String x:Key="ServiceUrl">[YOUR-SERVICE-SITE-URL]/api/customers</x:String>
 	````
 
-1. Run the Windows 8 Style UI application.
+1. Run the Windows Store application.
 
 1. Create a new customer and notice the toast notification.
 
@@ -1421,7 +1403,7 @@ By completing this hands-on lab you have learnt how to use Visual Studio 2012 to
 
 * Create an ASP.NET MVC 4 Web API service
 * Publish the service to Windows Azure Web Sites
-* Create a Windows 8 Style UI application that consumes the Web API service
-* Add Push Notifications to the Windows 8 Style UI application by using the Windows Azure Toolkit for Windows 8
+* Create a Windows Store application that consumes the Web API service
+* Add Push Notifications to the Windows Store application by using the Windows Azure Toolkit for Windows 8
 
 ---
