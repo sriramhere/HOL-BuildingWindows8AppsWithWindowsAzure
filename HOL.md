@@ -17,7 +17,7 @@ In this hands-on lab, you will learn how to use Visual Studio 2012 to:
 * Create an ASP.NET MVC 4 Web API service
 * Publish the service to Windows Azure Web Sites
 * Create a Windows Store application that consumes the Web API service
-* Add Push Notifications to the Windows Store application by using the Windows Azure Toolkit for Windows 8
+* Add Push Notifications to the Windows Store application by using WNS Recipe
 
 <a name="Prerequisites" />
 ### Prerequisites ###
@@ -1462,6 +1462,6 @@ By completing this hands-on lab you have learnt how to use Visual Studio 2012 to
 * Create an ASP.NET MVC 4 Web API service
 * Publish the service to Windows Azure Web Sites
 * Create a Windows Store application that consumes the Web API service
-* Add Push Notifications to the Windows Store application by using the Windows Azure Toolkit for Windows 8
+* Add Push Notifications to the Windows Store application by using WNS Recipe
 
 ---
