@@ -18,6 +18,8 @@ namespace WebApi.Models
         }
 
         public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Channel> Channels { get; set; }
     }
 
     public class CustomerContextInitializer : DropCreateDatabaseIfModelChanges<CustomerContext>

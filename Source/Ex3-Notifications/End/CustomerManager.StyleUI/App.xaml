@@ -18,7 +18,8 @@
             <!-- Application-specific resources -->
 
             <x:String x:Key="AppName">Customer Manager</x:String>
-            <x:String x:Key="ServiceUrl">[YOUR-SERVICE-SITE-URL]/api/customers</x:String>
+            <x:String x:Key="ServiceUrl">http://[YOUR-SERVICE-SITE-URL]/api/customers</x:String>
+            <x:String x:Key="ChannelServiceUrl">http://[YOUR-SERVICE-SITE-URL]/api/channel</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

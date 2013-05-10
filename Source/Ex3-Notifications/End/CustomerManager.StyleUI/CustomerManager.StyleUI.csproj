@@ -12,7 +12,6 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>CustomerManager.Metro_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -100,12 +99,19 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\WebApi\Models\Channel.cs">
+      <Link>DataModel\Channel.cs</Link>
+    </Compile>
     <Compile Include="..\WebApi\Models\Customer.cs">
       <Link>DataModel\Customer.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\ChannelWebApiClient.cs" />
     <Compile Include="DataModel\CustomersWebApiClient.cs" />
     <Compile Include="ViewModels\CustomerDetailViewModel.cs" />
     <Compile Include="ViewModels\GroupedCustomersViewModel.cs" />
@@ -133,19 +139,15 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="CustomerManager.Metro_TemporaryKey.pfx" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\Content\NotificationsClient.png" />
-    <Content Include="App_Readme\Content\NotificationsSolutionExplorer.png" />
-    <Content Include="App_Readme\Content\Site.css" />
-    <Content Include="App_Readme\Content\WATWindows8.png" />
-    <Content Include="App_Readme\Windows8.Notifications.Readme.htm" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\CustomerPlaceholder.png" />
+    <None Include="CustomerManager.StyleUI_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -168,11 +170,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Windows8.Notifications">
-      <HintPath>..\packages\Windows8.Notifications.0.0.1.6\lib\winrt45\Windows8.Notifications.winmd</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

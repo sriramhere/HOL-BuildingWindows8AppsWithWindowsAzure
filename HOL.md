@@ -996,31 +996,10 @@ In this task you will obtain the information that will be needed to enable your 
 
 1. In Visual Studio, continue working with the solutions obtained from the previous exercise. If you did not executed the previous exercise you can open **WebApi.sln** with **Visual Studio Express 2012 for Web** and **CustomerManager.sln** with **Visual Studio Express 2012 for Windows 8**, both located in the **Source/Ex3-Notifications/Begin** folder of this lab.
 
-1. If you opened the **WebApi** begin solution, open **Web.config** and configure the **CustomerContext** connection string to point to a Windows Azure SQL Database. You can use the connection string below replacing the placeholders. [Exercise 2 - Task 3](#Ex2Task3) instructs how to do this.
+1. If you opened the **WebApi** begin solution, open **Web.config** and configure the **CustomerContext** connection string to point to a Windows Azure SQL Database. You can use the connection string below replacing the placeholders. [Exercise 2 - Task 3](#Ex2Task3) instructs how to do this. Then build the solution.
 
 	````XML
 	<add name="CustomerContext" connectionString="Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];Password=[SERVER_ADMIN_PASSWORD];Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" providerName="System.Data.SqlClient" />
-	````
-
-1. Build the solution.
-
-1. Open the Package Manager Console and execute the following commands to revert Entity Framework to a previous version. MVC 4 is using Entity Framework 5 and the Windows Azure Toolkit for Windows 8 is designed for version 4.3.1. 
-
-	````PowerShell
-	Uninstall-Package EntityFramework
-	Install-Package EntityFramework -version 4.3.1
-	````
-	
-1. Now you need to remove an Entity Framework custom configuration section in Web.config. Open file and remove the `<entityFramework>` section, near the end of the file.
-
-	````XML
-  <entityFramework>
-    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
-      <parameters>
-        <parameter value="v11.0" />
-      </parameters>
-    </defaultConnectionFactory>
-  </entityFramework>
 	````
 
 1. In the **CustomerManager** begin solution, open **Package.appxmanifest**.
@@ -1087,7 +1066,7 @@ In this task you will obtain the information that will be needed to enable your 
 <a name="Ex3Task2" />
 #### Task 2 - Enabling Push Notifications####
 
-In this task you will configure your application  to be capable of raising toast notifications. Then, you will install NuGet packages with assets to simplify the code required for sending and receiving push notifications.
+In this task you will configure your application  to be capable of raising toast notifications. Then, you will create the necessary classes required for sending and receiving push notifications in both the WebApi and the CustomerManager.StyleUI solutions.
 
 1. Go back to Visual Studio, open the application manifest and select the **Application.UI** tab.
 
@@ -1138,41 +1117,180 @@ In this task you will configure your application  to be capable of raising toast
 
 	_Associating your app with the Windows Store Summary_
 
-1. Open the **Package Manager Console** from the **Tools | Library Package Manager** menu.
-
-1. In **Default project** make sure **CustomerManager.StyleUI** is selected.
-
-1. Execute the following command to install **Windows8.Notifications** package in the Windows Store application.
-
-    ````PowerShell
-    Install-Package Windows8.Notifications
-    ````
-
-    > **Note:** Windows Push Notification Client Recipe (**Windows8.Notifications**) provides a client object to allow open a notification channel from a device, and register it with a notification service at a particular endpoint.
-
 1. Go to the **WebApi** solution and open the **Package Manager Console** from the **Tools | Library Package Manager** menu.
 
 1. In **Default project** make sure **WebApi** is selected.
 
-1. Execute the following command to install the packages required for the server project.
+1. Execute the following command to install the packages required for WNS Recipe.
 
     ````PowerShell
 	Install-Package WnsRecipe
-	Install-Package WindowsAzure.Notifications.Sql
     ````
 
-    > **Note:** The WindowsAzure.Notifications.Sql package depends on **WindowsAzure.Notifications** which allows client devices to register (and unregister) for receiving push notifications messages. 
-    > The **WindowsAzure.Notifications.Sql** package provides storage in a SQL Database for the Push Notification Registration Web Site.
-    >
-    > The Windows Push Notification Service Recipe (**WnsRecipe**) is a push notification server-side helper library that provides an easy way to send all three types of push notification messages supported by Windows Push Notification Services (WNS): Tile, Toast, and Badge.
+    > **Note:** The Windows Push Notification Service Recipe (**WnsRecipe**) is a push notification server-side helper library that provides an easy way to send all three types of push notification messages supported by Windows Push Notification Services (WNS): Tile, Toast, and Badge.
 
-These NuGet packages are also available in the [Windows Azure Toolkit for Windows 8](http://watwindows8.codeplex.com/ "Windows Azure Toolkit for Windows 8").
-In this toolkit you can also find additional samples and documentation about push notifications. In particular, you may found useful the following resources:
+1. Inside the **Models** folder, create a new class and name it **Channel**. Replace its content with the following one:
 
- - [Windows Azure Toolkit for Windows 8 Content](http://watwindows8.codeplex.com/wikipage?title=Project%20Templates%2c%20Samples%20and%20Libraries%20Source%20Code&referringTitle=Documentation)
- - [Raw Notifications Sample – C# and JavaScript](http://watwindows8.codeplex.com/wikipage?title=Raw%20Notifications%20Sample)
- - [Notifications Samples – C# and JavaScript](http://watwindows8.codeplex.com/wikipage?title=Notifications%20Sample%20%E2%80%93%20C%23%20and%20JavaScript)
- - [Push Notification Worker Sample](http://watwindows8.codeplex.com/wikipage?title=Push%20Notification%20Worker%20Sample&referringTitle=Documentation)
+	````C#
+	namespace WebApi.Models
+	{
+		 using System.Runtime.Serialization;
+
+		 [DataContract]
+		 public class Channel
+		 {
+			  [DataMember]
+			  public int? Id { get; set; }
+
+			  [DataMember]
+			  public string Uri { get; set; }
+		 }
+	}
+	````
+
+1. Open **CustomerContext.cs** from the **Models** folder and add the following line of code after the declaration of the Customers DbSet in the CustomerContext class.
+
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Channels DbSet_)
+	
+	<!-- mark:7 -->
+	````C#
+	public class CustomerContext : DbContext
+	{
+		...
+
+		public DbSet<Customer> Customers { get; set; }
+
+		public DbSet<Channel> Channels { get; set; }
+	}
+	````
+
+1. Now create a new class inside the **Controllers** folder named **ChannelController** and add the following using directives.
+
+	````C#
+	using System.Web.Http;
+	using WebApi.Models;
+	````
+
+1. Make the ChannelController inherit from the **ApiController** class by adding the following highlighted code:
+
+	<!-- mark:1 -->
+	````C#
+	public class ChannelController : ApiController
+	{
+	}
+	````
+
+1. Insert the following member to have the CustomerContext available to perform the necessary operations with Entity Framework.
+	
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Customer Context Instantiation_)
+
+	<!-- mark:3 -->
+	````C#
+	public class ChannelController : ApiController
+	{
+		private CustomerContext db = new CustomerContext();
+	}
+	````
+
+1. Add the following **Create** method to process the create channel requests that you will implement later in this exercise in the Store app.
+
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Create Channel Method_)
+
+	<!-- mark:5-24 -->
+	````C#
+	public class ChannelController : Controller
+	{
+		...
+		
+		//
+		// POST: /Channel/Create
+		public Channel Create(Channel channel)
+		{
+			Channel ch = null;
+
+			if (ModelState.IsValid)
+			{
+				 ch = db.Channels.Find(channel.Id);
+
+				 if (ch == null)
+				 {
+					  db.Channels.Add(channel);
+					  db.SaveChanges();
+					  return channel;
+				 }
+			}
+
+			return ch;
+		}
+	}
+	````
+
+1. Add a **Dispose** method at the end of the controller.
+
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Channel Controller Dispose Method_)
+
+	<!-- mark:5-9 -->
+	````C#
+	public class ChannelController : Controller
+	{
+		...
+		
+		protected override void Dispose(bool disposing)
+		{
+			db.Dispose();
+			base.Dispose(disposing);
+		}
+	}
+	````
+
+1. Switch back to the **CustomerManager.StyleUI** solution and add a link to the _Channel_ class that you created early in the WebApi solution. To do this, right-click the **DataModel** folder and select **Add | Existing Item**. Browse to the **Source/Ex3-Notifications/Begin/WebApi/Models** folder and select **Channel.cs**. Now, click the down arrow next to the _Add_ button and select **Add As Link**.
+
+	![Adding a Link to the Channel Entity](Images/adding-link-to-channel-entity.png?raw=true "Adding a Link to the Channel Entity ")
+
+	_Adding a Link to the Channel Entity_
+	
+1. Inside the **DataModel** folder, add a new class named **ChannelWebApiClient** with the following using directives.
+
+	````C#
+	using System.IO;
+	using System.Net.Http;
+	using System.Runtime.Serialization.Json;
+	using WebApi.Models;
+	````
+
+1. Insert the following **RegisterChannel** method that will call the ChannelController of the WebApi to create a new channel for the current application.
+
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Register Channel Method_)
+
+	````C#
+	public static async Task<Channel> RegisterChannel(Channel channel)
+	{
+		object channelServiceUrl;
+		App.Current.Resources.TryGetValue("ChannelServiceUrl", out channelServiceUrl);
+
+		using (HttpClient client = new HttpClient())
+		{
+			 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Channel));
+
+			 using (MemoryStream stream = new MemoryStream())
+			 {
+				  serializer.WriteObject(stream, channel);
+				  stream.Seek(0, SeekOrigin.Begin);
+
+				  var json = new StreamReader(stream).ReadToEnd();
+
+				  var response = await client.PostAsync(channelServiceUrl as string + "/create", new StringContent(json, Encoding.UTF8, "application/json"));
+				  response.EnsureSuccessStatusCode();
+
+				  using (var responseStream = await response.Content.ReadAsStreamAsync())
+				  {
+						DataContractJsonSerializer responseSerializer = new DataContractJsonSerializer(typeof(Channel));
+						return responseSerializer.ReadObject(responseStream) as Channel;
+				  }
+			 }
+		}
+	}
+	````
 
 <a name="Ex3Task3" />
 #### Task 3 - Sending Push Notifications ####
@@ -1183,44 +1301,41 @@ The WNS authentication scheme is implemented using the client credentials profil
 
 1. Open the **CustomersController.cs** file from the WebApi project and add the following using directives.
     
-	(Code Snippet - _Building Windows 8 Apps - Ex3 - Send Notifications Namespaces_)
-
-    <!-- mark:1-4 -->
     ````C#
 	using System.Configuration;
 	using NotificationsExtensions;
 	using NotificationsExtensions.ToastContent;
-	using WebApi.CloudServices.Notifications;
     ````
 
 1. Add the following private method to send a toast notification about the new customers.
 
 	(Code Snippet - _Building Windows 8 Apps - Ex3 - SendNotification_)
 
-    <!-- mark:1-17 -->
-    ````C#
-    private void SendNotification(Customer customer)
-    {
-        var clientId = ConfigurationManager.AppSettings["ClientId"];
-        var clientSecret = ConfigurationManager.AppSettings["ClientSecret"];
-        var tokenProvider = new WnsAccessTokenProvider(clientId, clientSecret);
-        var notification = ToastContentFactory.CreateToastText02();
+	````C#
+	private void SendNotification(Customer customer)
+	{
+		var clientId = ConfigurationManager.AppSettings["ClientId"];
+		var clientSecret = ConfigurationManager.AppSettings["ClientSecret"];
+		var tokenProvider = new WnsAccessTokenProvider(clientId, clientSecret);
+		var notification = ToastContentFactory.CreateToastText02();
 
-        notification.TextHeading.Text = "New customer added!";
-        notification.TextBodyWrap.Text = customer.Name;
+		notification.TextHeading.Text = "New customer added!";
+		notification.TextBodyWrap.Text = customer.Name;
 
-        var provider = NotificationServiceContext.Current.Configuration.StorageProvider;
+		var channels = db.Channels;
 
-        foreach (var endpoint in provider.All())
-        {
-            var result = notification.Send(new Uri(endpoint.ChannelUri), tokenProvider);
-        }
-    }
-    ````
+		foreach (var channel in channels)
+		{
+			 var result = notification.Send(new Uri(channel.Uri), tokenProvider);
+		}
+	}
+	````
 
-    > **Note:** A channel is a unique address that represents a single user on a single device for a single application or secondary tile. Using the channel URI, the Web Site can send a notification whenever it has an update for the user. With the **NotificationServiceContext** we can get the full list of the client endpoints registered with the Web Site.
+	> **Note:** A channel is a unique address that represents a single user on a single device for a single application or secondary tile. Using the channel URI, the Web Site can send a notification whenever it has an update for the user. With the **NotificationServiceContext** we can get the full list of the client endpoints registered with the Web Site.
 
 1. Find the **PostCustomer** function and add a call to **SendNotification** method.
+
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Call to Send Notification_)
 
     <!-- mark:9 -->
     ````C#
@@ -1257,56 +1372,6 @@ The WNS authentication scheme is implemented using the client credentials profil
 
     > **Note:** For demo purposes we simply store these values in the Web.config file, but the Package security identifier SID and client secret should be securely stored. Disclosure or theft of this information could enable an attacker to send notifications to your users without your permission or knowledge.
 
-1. Open **App_Start\NotificationServiceSql.cs** and replace the code in the **PostStart** method with the following code.
-    
-	(Code Snippet - _Building Windows 8 Apps - Ex3 - Set Connection String_)
-
-    <!-- mark:7 -->
-    ````C#
-	public static void PostStart()
-	{
-		// Configure the SQL database as the storage for the Push Notifications Registration Service.
-		NotificationServiceContext.Current.Configure(
-			c =>
-			{
-				var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-				c.StorageProvider = new SqlEndpointRepository(connectionString);
-			});
-	}
-    ````
-
-1. Open **Web.config** and configure the **DefaultConnection** connection string to point to a Windows Azure SQL Database. You can use the connection string below replacing the placeholders. [Exercise 2 - Task 3](#Ex2Task3) instructs how to do this.
-
-	````XML
-	<add name="DefaultConnection" connectionString="Server=tcp:[SERVER_URL],1433;Database=CustomersDB.Notifications;User ID=[SERVER_ADMIN_LOGIN];Password=[SERVER_ADMIN_PASSWORD];Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" providerName="System.Data.SqlClient" />
-
-	````
-
-	> **Note:** For simplicity purposes the service is using two different databases for storing application data (customers) and notifications. In a production scenario you might want to use one database by merging the two different Entity Framework contexts.
-
-1. Open **App_Start\NotificationService.cs** and in the **PreStart** method, comment the line that configures the storage provider as shown below. As you are using the SQL version of the WindowsAzure.Notifications NuGet, which stores notifications data in a SQL database, you should remove this line that configures Windows Azure Storage.
-
-	<!-- mark:12 -->
-	````C#	    
-	public static void PreStart()
-	{
-		NotificationServiceContext.Current.Configure(
-			 c =>
-			 {
-				  ...
-
-				  // TODO: Specify a rule for authorizing users when registring (register, unregister)
-				  c.AuthorizeRegistrationRequest = AuthorizeUserRequest;
-
-				  // TODO: Replace with your own Windows Azure Storage account name and key, or read it from a configuration file
-				  //c.StorageProvider = new WindowsAzureEndpointRepository(CloudStorageAccount.DevelopmentStorageAccount);
-
-				  ...
-			 });
-	}
-	````
-
-
 1. Publish the Customers Web API service in Windows Azure. To do this, follow the steps in [Exercise 2, Task 3](#Ex2Task3).
 
 <a name="Ex3Task4" />
@@ -1315,44 +1380,47 @@ The WNS authentication scheme is implemented using the client credentials profil
 When an application that is capable of receiving push notifications runs, it must first request a notification channel.
 After the application has successfully created a channel URI, it sends it to its Web Site, together with any app-specific metadata that should be associated with this URI.
 
-In this task you will use the class library provided by the **Windows8.Notifications** package to request the channel and register your application with the service when it is launched and unregister it when it is suspended. 
+In this task you will call the ChannelController of the WebApi app to request the channel and register your application with the service when it is launched and unregister it when it is suspended. 
 
-1. Open **App.xaml.cs** from the **CustomerManager.StyleUI** project and add the following using directive.
+1. Open **App.xaml.cs** from the **CustomerManager.StyleUI** project and add the following using directives.
+
+	````C#
+	using CustomerManager.StyleUI.DataModel;
+	using WebApi.Models;
+	using Windows.Networking.PushNotifications;
+	using Windows.Storage;
+	````
+
+1. Add the following private method at the end of the class to register a channel that will be used to send push notifications.
     
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Register and Unregister Channel methods_)
+
+	<!-- mark:5-18 -->
     ````C#
-    using Windows8.Notifications;
-    ````
-
-1. Add the following members to the App class. Update the **ServiceEnpointsUrl** value according to the location of the deployed Web API project.
-
-	(Code Snippet - _Building Windows 8 Apps - Ex3 - App Members_)
-
-    <!-- mark:1-5 -->
-    ````C#
-	private const string ServiceEnpointsUrl = "[YOUR_WEB_API_URL]/endpoints";
-	private const string ApplicationId = "CustomerManager";
-	private const string DeviceId = "deviceId";
-
-	private NotificationClient notificationClient;
-    ````
-
-1. Initialize the **notificationClient** member in the constructor.
-
-	(Code Snippet - _Building Windows 8 Apps - Ex3 - NotificationClient Initialization_)
-
-    <!-- mark:3 -->
-    ````C#
-	public App()
+	sealed partial class App : Application
 	{
-		this.notificationClient = new NotificationClient(ApplicationId, DeviceId, ServiceEnpointsUrl);
-		this.InitializeComponent();
-		this.Suspending += OnSuspending;
+		...
+
+		private async void RegisterChannel()
+		{
+			var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+			if (ApplicationData.Current.LocalSettings.Values["ChannelId"] == null)
+			{
+				 var channelDTO = await ChannelWebApiClient.RegisterChannel(new Channel
+				 {
+					  Uri = channel.Uri
+				 });
+
+				 ApplicationData.Current.LocalSettings.Values["ChannelId"] = channelDTO.Id;
+			}
+		}
 	}
     ````
 
-1. Call the **Register** function from the **notificationClient** member in the **OnLaunched** event.
+1. Call the **RegisterChannel** method in the **OnLaunched** event.
 
-	(Code Snippet - _Building Windows 8 Apps - Ex3 - Register Notification Client_)
+	(Code Snippet - _Building Windows 8 Apps - Ex3 - Call Register Channel method_)
 
     <!-- mark:5 -->
     ````C#
@@ -1360,23 +1428,7 @@ In this task you will use the class library provided by the **Windows8.Notificat
     {
         ...
 
-        await this.notificationClient.Register();
-    }
-    ````
-
-1. Call the **Unregister** function from the **notificationClient** member in the **OnSuspending** event.
-
-	(Code Snippet - _Building Windows 8 Apps - Ex3 - Unregister Notification Client_)
-
-    <!-- mark:7 -->
-    ````C#
-    private async void OnSuspending(object sender, SuspendingEventArgs e)
-    {
-        var deferral = e.SuspendingOperation.GetDeferral();
-        await SuspensionManager.SaveAsync();
-        deferral.Complete();
-
-        await this.notificationClient.Unregister();
+        this.RegisterChannel();
     }
     ````
 
@@ -1384,6 +1436,12 @@ In this task you will use the class library provided by the **Windows8.Notificat
 	
 	````XML
 	<x:String x:Key="ServiceUrl">[YOUR-SERVICE-SITE-URL]/api/customers</x:String>
+	````
+
+1. Add a new key named **ChannelServiceUrl**. To do this, insert the following line right after the _ServiceUrl_ one, replacing the _[YOUR-SERVICE-SITE-URL]_ with the one of the Web API service deployed as you did in the previous step.
+
+	````XML
+	<x:String x:Key="ChannelServiceUrl">[YOUR-SERVICE-SITE-URL]/api/channel</x:String>
 	````
 
 1. Run the Windows Store application.

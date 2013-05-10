@@ -12,7 +12,6 @@ using WebApi.Models;
 using System.Configuration;
 using NotificationsExtensions;
 using NotificationsExtensions.ToastContent;
-using WebApi.CloudServices.Notifications;
 
 namespace WebApi.Controllers
 {
@@ -105,12 +104,6 @@ namespace WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, customer);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
         private void SendNotification(Customer customer)
         {
             var clientId = ConfigurationManager.AppSettings["ClientId"];
@@ -121,12 +114,18 @@ namespace WebApi.Controllers
             notification.TextHeading.Text = "New customer added!";
             notification.TextBodyWrap.Text = customer.Name;
 
-            var provider = NotificationServiceContext.Current.Configuration.StorageProvider;
+            var channels = db.Channels;
 
-            foreach (var endpoint in provider.All())
+            foreach (var channel in channels)
             {
-                var result = notification.Send(new Uri(endpoint.ChannelUri), tokenProvider);
+                var result = notification.Send(new Uri(channel.Uri), tokenProvider);
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
