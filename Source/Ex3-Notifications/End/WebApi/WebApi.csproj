@@ -41,24 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AspNet.SuppressFormsRedirect">
-      <HintPath>..\packages\aspnet.suppressformsredirect.0.0.1.4\lib\40\AspNet.SuppressFormsRedirect.dll</HintPath>
-    </Reference>
-    <Reference Include="Common">
-      <HintPath>..\packages\WindowsAzure.Common.1.0.3\lib\net40\Common.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -68,11 +51,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -87,6 +67,9 @@
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -135,9 +118,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebActivator">
-      <HintPath>..\packages\WebActivator.1.5.1\lib\net40\WebActivator.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -153,34 +133,16 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\NotificationService.cs" />
-    <Compile Include="App_Start\NotificationServiceSql.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="CloudServices.Notifications.Common\Endpoint.cs" />
-    <Compile Include="CloudServices.Notifications.Common\IEndpointRepository.cs" />
-    <Compile Include="CloudServices.Notifications\ConfigurationExtensions.cs" />
-    <Compile Include="CloudServices.Notifications\Constants.cs" />
-    <Compile Include="CloudServices.Notifications\Controllers\EndpointController.cs" />
-    <Compile Include="CloudServices.Notifications\NotificationServiceConfig.cs" />
-    <Compile Include="CloudServices.Notifications\NotificationServiceContext.cs" />
-    <Compile Include="CloudServices.Notifications\RouteExtensions.cs" />
-    <Compile Include="CloudServices.Notifications\Security\AuthenticateEndpointAttribute.cs" />
-    <Compile Include="CloudServices.Notifications\Security\AuthorizeManagementEndpointAttribute.cs" />
-    <Compile Include="CloudServices.Notifications\Security\AuthorizeRegistrationEndpointAttribute.cs" />
-    <Compile Include="CloudServices.Notifications\Security\FuncBasedAuthorizationFilterAttribute.cs" />
-    <Compile Include="CloudServices.Notifications\Sql\SqlEndpointContext.cs" />
-    <Compile Include="CloudServices.Notifications\Sql\SqlEndpointRepository.cs" />
-    <Compile Include="CloudServices.Notifications\Sql\SqlEndpointTableRow.cs" />
-    <Compile Include="CloudServices.Notifications\WindowsAzure\DataServiceQueryExceptionExtensions.cs" />
-    <Compile Include="CloudServices.Notifications\WindowsAzure\EndpointTableRow.cs" />
-    <Compile Include="CloudServices.Notifications\WindowsAzure\WindowsAzureEndpointRepository.cs" />
+    <Compile Include="Controllers\ChannelController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,8 +151,6 @@
     <Content Include="App_Readme\Content\AddingNotificationsExtensions.png" />
     <Content Include="App_Readme\Content\EnableCustomDiagnostics.png" />
     <Content Include="App_Readme\Content\EnableDiagnostics.png" />
-    <Content Include="App_Readme\Content\NotificationService.png" />
-    <Content Include="App_Readme\Content\NotificationServiceSql.png" />
     <Content Include="App_Readme\Content\SendNotification.png" />
     <Content Include="App_Readme\Content\ServiceConfiguration.png" />
     <Content Include="App_Readme\Content\Site.css" />
@@ -201,8 +161,6 @@
     <Content Include="App_Readme\Content\WnsAccessTokenProvider.png" />
     <Content Include="App_Readme\Content\WnsAzureConfigurationSetting.png" />
     <Content Include="App_Readme\Content\WnsRecipeAssembly.png" />
-    <Content Include="App_Readme\WindowsAzure.Notifications.Readme.htm" />
-    <Content Include="App_Readme\WindowsAzure.Notifications.Sql.Readme.htm" />
     <Content Include="App_Readme\WnsRecipe.Readme.htm" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

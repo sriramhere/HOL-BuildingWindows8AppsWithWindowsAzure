@@ -1,31 +1,28 @@
 ﻿namespace CustomerManager.StyleUI
 {
     using System;
+
     using CustomerManager.StyleUI.Common;
+    using CustomerManager.StyleUI.DataModel;
+    using WebApi.Models;
     using Windows.ApplicationModel;
     using Windows.ApplicationModel.Activation;
+    using Windows.Networking.PushNotifications;
+    using Windows.Storage;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
-    using Windows8.Notifications;
 
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application
     {
-        private const string ServiceEnpointsUrl = "[YOUR_WEB_API_URL]/endpoints";
-        private const string ApplicationId = "CustomerManager";
-        private const string DeviceId = "deviceId";
-
-        private NotificationClient notificationClient;
-
         /// <summary>
         /// Initializes the singleton Application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
-            this.notificationClient = new NotificationClient(ApplicationId, DeviceId, ServiceEnpointsUrl);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -67,12 +64,12 @@
                     throw new Exception("Failed to create initial page");
                 }
             }
-
+            
             // Place the frame in the current Window and ensure that it is active
             Window.Current.Content = rootFrame;
             Window.Current.Activate();
 
-            await this.notificationClient.Register();
+            this.RegisterChannel();
         }
 
         /// <summary>
@@ -87,8 +84,21 @@
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
 
-            await this.notificationClient.Unregister();
+        private async void RegisterChannel()
+        {
+            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+            
+            if (ApplicationData.Current.LocalSettings.Values["ChannelId"] == null)
+            {
+                var channelDTO = await ChannelWebApiClient.RegisterChannel(new Channel
+                {
+                    Uri = channel.Uri
+                });
+
+                ApplicationData.Current.LocalSettings.Values["ChannelId"] = channelDTO.Id;
+            }
         }
     }
 }
