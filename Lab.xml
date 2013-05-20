@@ -3,7 +3,7 @@
   <Id>BuildingWindows8AppsWithWindowsAzure</Id>
   <Technologies>
     <Technology>Windows Azure</Technology>
-    <Technology>Windows 8 Store apps</Technology>
+    <Technology>Windows 8 Style UI apps</Technology>
     <Technology>ASP.NET Web Api</Technology>
   </Technologies>
   <Author>
