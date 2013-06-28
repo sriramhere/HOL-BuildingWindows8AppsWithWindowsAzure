@@ -701,7 +701,7 @@ Server=tcp:[SERVER_URL],1433;Database=CustomersDB;User ID=[SERVER_ADMIN_LOGIN];P
 
 1. In the browser opened, go to **/api/customers** to retrieve the full list of customers.
 
-	![Testing the Customers Web API](images/testing-the-customers-web-api.png?raw=true "Testing the Customers Web API")
+	![Testing the Customers Web API](Images/testing-the-customers-web-api.png?raw=true "Testing the Customers Web API")
 
 	_Testing the Customers Web API_
 
